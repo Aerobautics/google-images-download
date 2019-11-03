@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 from tkinter import *
+#from PIL import Image, ImageTk
 import PIL
 from PIL import ImageTk
 from PIL import Image
 from xml.dom.minidom import parse
-import os
-import errno
+#import sys
+import os, errno
 import time
 import xml.dom.minidom
 import tkinter.messagebox
@@ -42,7 +43,6 @@ class MainGui:
 		self.sessionFile = []
 		self.main_form = []
 		self.main_frame = []
-		self.preview_frame = []
 
 	def createXmlString(self, input_items, input_directory):
 		xmlString = '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -140,10 +140,10 @@ class MainGui:
 		for thumbnailFile in thumbnail_files:
 			loadImage = Image.open(thumbnailFile)
 			renderImage = ImageTk.PhotoImage(loadImage)
-			imageLabels.append(Label(self.preview_frame, image = renderImage))
+			imageLabels.append(Label(self.main_frame, image = renderImage))
 			imageLabels[gridCount].image = renderImage
 			if gridCount < 4:
-				imageLabels[gridCount].grid(row = 0, column = gridCount)
+				imageLabels[gridCount].grid(row = 2, column = gridCount)
 			gridCount = gridCount + 1						
 		return thumbnail_files
 
@@ -177,10 +177,7 @@ class MainGui:
 		# Main frame
 		main_frame = Frame(root)
 		main_frame.pack_propagate(False)
-		main_frame.pack(side = LEFT)
-		# Preview frame
-		preview_frame = Frame(root)
-		preview_frame.grid(fill = BOTH, expand = True)
+		main_frame.pack(fill = BOTH, expand = True)
 		# Status bar
 		status_bar = Label(root, text = "Ready", bd = 1, relief = SUNKEN, anchor = W)
 		status_bar.pack(side = BOTTOM, fill = X)
@@ -198,7 +195,6 @@ class MainGui:
 
 		self.main_form = root
 		self.main_frame = main_frame
-		self.preview_frame = preview_frame
 
 		root.mainloop()
 

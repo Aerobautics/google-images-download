@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gid>
+	<session>
+		<search keyword="polar bear">
+			<picture isthumbnail="true">
+				<filename>/home/stewart/google-images-download/downloads/polar_bear-thumbnail/Polar_Bear_-_Alaska_%28cropped%29.jpg</filename>
+				<provenance>https://upload.wikimedia.org/wikipedia/commons/6/66/Polar_Bear_-_Alaska_%28cropped%29.jpg</provenance>
+			</picture>
+			<picture isthumbnail="true">
+				<filename>/home/stewart/google-images-download/downloads/polar_bear-thumbnail/polar-bear-hero.jpg?1345901694</filename>
+				<provenance>https://c402277.ssl.cf1.rackcdn.com/photos/2330/images/hero_small/polar-bear-hero.jpg?1345901694</provenance>
+			</picture>
+			<picture isthumbnail="true">
+				<filename>/home/stewart/google-images-download/downloads/polar_bear-thumbnail/tnc_17745326_preview-1260x708.jpg</filename>
+				<provenance>https://19mvmv3yn2qc2bdb912o1t2n-wpengine.netdna-ssl.com/science/files/2013/12/tnc_17745326_preview-1260x708.jpg</provenance>
+			</picture>
+			<picture isthumbnail="true">
+				<filename>/home/stewart/google-images-download/downloads/polar_bear-thumbnail/PolarBeariStock.jpg?ve=1&amp;tl=1</filename>
+				<provenance>https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2018/09/931/524/PolarBeariStock.jpg?ve=1&amp;tl=1</provenance>
+			</picture>
+			<picture isthumbnail="true">
+				<filename>/home/stewart/google-images-download/downloads/polar_bear-thumbnail/polarbear--adobe-stockvaclav_2500x1250.jpg.jpg?width=1900&amp;height=950&amp;transform=DownFill</filename>
+				<provenance>https://www.hurtigruten.com.au/globalassets/global/destinations/svalbard/2021/circumnavigating-sva---realm-of-the-polar-bear/top-gallery-photos/polarbear--adobe-stockvaclav_2500x1250.jpg.jpg?width=1900&amp;height=950&amp;transform=DownFill</provenance>
+			</picture>
+		</search>
+	</session>
+</gid>

@@ -1,0 +1,29 @@
+XML Format
+
+<gid>
+	<session>
+		<search>
+			<picture isthumbnail="false">
+				<location>
+				</location>
+				<provenance>
+				</provenance>
+				<thumbnail>
+				</thumbnail>
+			</picture>
+		</search>
+	</session>
+</gid>
+
+TODO
+
+(1.) Package separate modules
+	(a.) Text processing - GidString
+	(b.) GUI - GidGui
+	(c.) Session - GidSession
+	(d.) XML - GidData
+	(e.) Pictures - GidPicture
+(2.) Expand session
+	(a.) Include all items dictionary items
+	(b.) Generate unique identifiers for sessions and pictures
+	(c.) Break sessions into separate files?

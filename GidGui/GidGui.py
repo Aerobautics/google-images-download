@@ -1,89 +1,42 @@
 #!/usr/bin/env python3
+# Written by Stewart Nash (Aerobautics) November 2019
+"""GUI for the customized google_images_download.
+"""
 from tkinter import *
 import PIL
 from PIL import ImageTk
 from PIL import Image
-from xml.dom.minidom import parse
+import sys
 import os
 import errno
 import time
-import xml.dom.minidom
 import tkinter.messagebox
+sys.path.insert(1, '../')
 from google_images_download import google_images_download
+from GidData import GidData
+from GidSession import GidSession
 
 #https://tkdocs.com/index.html
 
 # GID stands for 'Google Image Downloader'
 
-class GidPicture:
-	'This class encapsulates all of the information owned by an individual downloaded image.'
-	def __init__(self):
-		self.imageNumber = 0
-		self.fileName = ""
-		self.fileOrigin = ""
-		self.fileThumbnail = ""		
-
-class GidSession:
-	'This class encapsulates all of the information for a GID session. It is used by the GUI interface.'
-	currentIndex = 0
-
-	def __init__(self):
-		self.gidPictures = []
-		self.keyword = ""
-		self.sessionIndex = 0
-		self.thumbnail_only = False
-
-class MainGui:
+class GidGui:
 	'This class contains the main GUI window used by the application.'
 	def __init__(self):
 		self.gidSession = []
 		self.sessionList = []
-		self.currentSession = []
-		self.sessionFile = []
 		self.main_form = []
 		self.main_frame = []
-		self.preview_frame = []
-
-	def createXmlString(self, input_items, input_directory):
-		xmlString = '<?xml version="1.0" encoding="UTF-8"?>\n'
-		xmlString = xmlString + '<gid>\n' 			
-		xmlString = xmlString + '\t<session>\n'
-		xmlString = xmlString + '\t\t<search keyword="' + self.currentSession.keyword
-		xmlString = xmlString + '">\n'
-		for item in input_items:
-			xmlString = xmlString + '\t\t\t<picture isthumbnail="true">\n'
-			xmlString = xmlString + '\t\t\t\t<filename>'
-			xmlString = xmlString + os.path.join(input_directory, item['image_filename']).replace('&', '&amp;')
-			xmlString = xmlString + '</filename>\n'
-			xmlString = xmlString + '\t\t\t\t<provenance>'
-			xmlString = xmlString + item['image_link'].replace('&', '&amp;')
-			xmlString = xmlString + '</provenance>\n'			
-			xmlString = xmlString + '\t\t\t</picture>\n'
-		xmlString = xmlString + '\t\t</search>\n'
-		xmlString = xmlString + '\t</session>\n'
-		xmlString = xmlString + '</gid>'
-		return xmlString
-
-	def readXmlString(self):
-		# Open XML document using the minidom parser
-		filenames = []
-		DOMTree = xml.dom.minidom.parse("session.gid")
-		collection = DOMTree.documentElement
-		pictures = collection.getElementsByTagName("picture")
-		for picture in pictures:
-			filename = picture.getElementsByTagName("filename")[0]
-			filenames.append(filename.childNodes[0].data) 
-			print("readXmlString {}".format(filenames))
-		return filenames				
+		self.currentSession = GidSession.GidSession()
+		self.currentSession.keyword = "polar bear"
+		self.currentSession.thumbnail_only = True
+		self.gidData = GidData.GidData()
+		self.gidData.set_currentSession(self.currentSession)
 
 	def defaultFunction(self):
 		print("Google Images Download")
 
 	def previewDownload(self):
-		self.currentSession = GidSession()
-		self.currentSession.keyword = "polar bear"
-		self.currentSession.thumbnail_only = True
-		self.sessionFile = open("session.gid", "w") 
 		start_time = time.time()
 		arguments = {
 			"keywords": self.currentSession.keyword,
@@ -127,9 +80,6 @@ class MainGui:
 			else:
 				print("Failed to delete {}".format(os.path.join(output_folder_path, file)))
 		filePaths = outputPaths[self.currentSession.keyword]
-		xmlString = self.createXmlString(outputItems, thumbnail_folder_path)
-		self.sessionFile.write(xmlString)
-		self.sessionFile.close()
 		thumbnail_files = []
 		for item in outputItems:
 			current_file = os.path.join(thumbnail_folder_path, item['image_filename'])
@@ -140,11 +90,12 @@ class MainGui:
 		for thumbnailFile in thumbnail_files:
 			loadImage = Image.open(thumbnailFile)
 			renderImage = ImageTk.PhotoImage(loadImage)
-			imageLabels.append(Label(self.preview_frame, image = renderImage))
+			imageLabels.append(Label(self.main_frame, image = renderImage))
 			imageLabels[gridCount].image = renderImage
 			if gridCount < 4:
-				imageLabels[gridCount].grid(row = 0, column = gridCount)
-			gridCount = gridCount + 1						
+				imageLabels[gridCount].grid(row = 2, column = gridCount)
+			gridCount = gridCount + 1
+		self.gidData.storeSearch(outputItems, thumbnail_folder_path)						
 		return thumbnail_files
 
 	def removeFile(self, file):
@@ -166,7 +117,7 @@ class MainGui:
 		root.config(menu = main_menu)
 		file_menu = Menu(main_menu)
 		main_menu.add_cascade(label = "File", menu = file_menu)
-		file_menu.add_command(label = "Open", command = self.readXmlString)
+		file_menu.add_command(label = "Open", command = self.gidData.readSession)
 		file_menu.add_separator()
 		file_menu.add_command(label = "Exit", command = root.destroy)
 		search_menu = Menu(main_menu)
@@ -177,10 +128,7 @@ class MainGui:
 		# Main frame
 		main_frame = Frame(root)
 		main_frame.pack_propagate(False)
-		main_frame.pack(side = LEFT)
-		# Preview frame
-		preview_frame = Frame(root)
-		preview_frame.grid(fill = BOTH, expand = True)
+		main_frame.pack(fill = BOTH, expand = True)
 		# Status bar
 		status_bar = Label(root, text = "Ready", bd = 1, relief = SUNKEN, anchor = W)
 		status_bar.pack(side = BOTTOM, fill = X)
@@ -198,14 +146,5 @@ class MainGui:
 
 		self.main_form = root
 		self.main_frame = main_frame
-		self.preview_frame = preview_frame
 
 		root.mainloop()
-
-def main():
-	#test_download_images_to_default_location()
-	mainGui = MainGui()
-	mainGui.display()
-	
-if __name__ == "__main__":
-	main()
