@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gid>
 	<session>
-		<search keyword="polar bear">
+		<search keyword="white rose">
 			<picture isthumbnail="true">
-				<filename>/home/stewart/google-images-download/downloads/polar_bear-thumbnail/Polar_Bear_-_Alaska_%28cropped%29.jpg</filename>
-				<provenance>https://upload.wikimedia.org/wikipedia/commons/6/66/Polar_Bear_-_Alaska_%28cropped%29.jpg</provenance>
+				<filename>/home/stewart/google-images-download/downloads/white_rose-thumbnail/globalrose-flower-bouquets-50-birthday-white-roses-64_1000.jpg</filename>
+				<provenance>https://images.homedepot-static.com/productImages/1245e86f-ec31-49e4-b793-48ac13c5dc00/svn/globalrose-flower-bouquets-50-birthday-white-roses-64_1000.jpg</provenance>
 			</picture>
 			<picture isthumbnail="true">
-				<filename>/home/stewart/google-images-download/downloads/polar_bear-thumbnail/polar-bear-hero.jpg?1345901694</filename>
-				<provenance>https://c402277.ssl.cf1.rackcdn.com/photos/2330/images/hero_small/polar-bear-hero.jpg?1345901694</provenance>
+				<filename>/home/stewart/google-images-download/downloads/white_rose-thumbnail/SF-ROSE-W.jpg?auto=webp&amp;quality=80</filename>
+				<provenance>https://sf.tac-cdn.net/images/products/large/SF-ROSE-W.jpg?auto=webp&amp;quality=80</provenance>
 			</picture>
 			<picture isthumbnail="true">
-				<filename>/home/stewart/google-images-download/downloads/polar_bear-thumbnail/tnc_17745326_preview-1260x708.jpg</filename>
-				<provenance>https://19mvmv3yn2qc2bdb912o1t2n-wpengine.netdna-ssl.com/science/files/2013/12/tnc_17745326_preview-1260x708.jpg</provenance>
+				<filename>/home/stewart/google-images-download/downloads/white_rose-thumbnail/White-rose-1-.jpg</filename>
+				<provenance>https://nyflowerguy.com/wp-content/uploads/2017/11/White-rose-1-.jpg</provenance>
 			</picture>
 			<picture isthumbnail="true">
-				<filename>/home/stewart/google-images-download/downloads/polar_bear-thumbnail/PolarBeariStock.jpg?ve=1&amp;tl=1</filename>
-				<provenance>https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2018/09/931/524/PolarBeariStock.jpg?ve=1&amp;tl=1</provenance>
+				<filename>/home/stewart/google-images-download/downloads/white_rose-thumbnail/20180918010629_file_5ba04f9537481.jpg</filename>
+				<provenance>https://res.cloudinary.com/bloomnation/c_pad,d_vendor:global:catalog:product:image.png,f_auto,fl_preserve_transparency,q_auto/v1547949261/vendor/5584/catalog/product/2/0/20180918010629_file_5ba04f9537481.jpg</provenance>
 			</picture>
 			<picture isthumbnail="true">
-				<filename>/home/stewart/google-images-download/downloads/polar_bear-thumbnail/polarbear--adobe-stockvaclav_2500x1250.jpg.jpg?width=1900&amp;height=950&amp;transform=DownFill</filename>
-				<provenance>https://www.hurtigruten.com.au/globalassets/global/destinations/svalbard/2021/circumnavigating-sva---realm-of-the-polar-bear/top-gallery-photos/polarbear--adobe-stockvaclav_2500x1250.jpg.jpg?width=1900&amp;height=950&amp;transform=DownFill</provenance>
+				<filename>/home/stewart/google-images-download/downloads/white_rose-thumbnail/IMG_8200.jpg</filename>
+				<provenance>https://bonaparteflowers.com/wp-content/uploads/2017/04/IMG_8200.jpg</provenance>
+			</picture>
+			<picture isthumbnail="true">
+				<filename>/home/stewart/google-images-download/downloads/white_rose-thumbnail/wall-murals-single-white-rose.jpg.jpg</filename>
+				<provenance>https://img.pixers.pics/pho_wat(s3:700/FO/52/47/27/84/700_FO52472784_15b7c26df588c95cad7b1d601fcd592a.jpg,467,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,247,650,jpg)/wall-murals-single-white-rose.jpg.jpg</provenance>
+			</picture>
+			<picture isthumbnail="true">
+				<filename>/home/stewart/google-images-download/downloads/white_rose-thumbnail/fresh-white-rose-flower-plain-820x532.jpg</filename>
+				<provenance>https://www.muralswallpaper.com/app/uploads/fresh-white-rose-flower-plain-820x532.jpg</provenance>
+			</picture>
+			<picture isthumbnail="true">
+				<filename>/home/stewart/google-images-download/downloads/white_rose-thumbnail/FlowersAndSympathy_SingleStem_SingleWhiteRose-510x515.jpg</filename>
+				<provenance>https://www.flowersandsympathy.com/wp-content/uploads/FlowersAndSympathy_SingleStem_SingleWhiteRose-510x515.jpg</provenance>
 			</picture>
 		</search>
 	</session>

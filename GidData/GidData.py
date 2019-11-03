@@ -31,7 +31,7 @@ class GidData:
 		xmlString = '<?xml version="1.0" encoding="UTF-8"?>\n'
 		xmlString = xmlString + '<gid>\n' 			
 		xmlString = xmlString + '\t<session>\n'
-		xmlString = xmlString + '\t\t<search keyword="' + self._currentSession.keyword
+		xmlString = xmlString + '\t\t<search keyword="' + self._currentSession.keywords
 		xmlString = xmlString + '">\n'
 		for item in input_items:
 			xmlString = xmlString + '\t\t\t<picture isthumbnail="true">\n'

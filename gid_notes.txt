@@ -27,3 +27,6 @@ TODO
 	(a.) Include all items dictionary items
 	(b.) Generate unique identifiers for sessions and pictures
 	(c.) Break sessions into separate files?
+(3.) Tasks (uncategorized)
+	(a.) Display session tree
+	(b.) Display directories and size consumed

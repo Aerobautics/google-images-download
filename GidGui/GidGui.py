@@ -23,26 +23,45 @@ from GidSession import GidSession
 class GidGui:
 	'This class contains the main GUI window used by the application.'
 	def __init__(self):
+		self.rows = 3
+		self.columns = 3
+		self.pages = 100
 		self.gidSession = []
+		self.keyword_entry = []
 		self.sessionList = []
 		self.main_form = []
 		self.main_frame = []
+		self.preview_frame = []
 		self.currentSession = GidSession.GidSession()
-		self.currentSession.keyword = "polar bear"
+		self.currentSession.keywords = "polar bear"
 		self.currentSession.thumbnail_only = True
 		self.gidData = GidData.GidData()
 		self.gidData.set_currentSession(self.currentSession)
 
+	def getKeyword(self):
+		return self.keyword_entry.get()
+
 	def defaultFunction(self):
 		print("Google Images Download")
 
+	def populateCurrentSession(self, keyword = None, limit = None, thumbnail = None):
+		if keyword is not None:
+			self.currentSession.keywords = keyword
+		if thumbnail is not None:
+			self.currentSession.thumbnail_only = thumbnail
+		if limit is not None:
+			self.currentSession.limit = limit
+
 	def previewDownload(self):
 		start_time = time.time()
+		if self.getKeyword() == "":
+			return False
+		self.populateCurrentSession(keyword = self.getKeyword(), limit = 8, thumbnail = True)
 		arguments = {
-			"keywords": self.currentSession.keyword,
-			"limit": 5,
+			"keywords": self.currentSession.keywords,
+			"limit": self.currentSession.limit,
 			"print_urls": True,
-			"thumbnail_only": True
+			"thumbnail_only": self.currentSession.thumbnail_only
 		}
 		try:
 			temp = arguments['output_folder']
@@ -79,7 +98,7 @@ class GidGui:
 				print("Deleted {}".format(os.path.join(output_folder_path, file)))
 			else:
 				print("Failed to delete {}".format(os.path.join(output_folder_path, file)))
-		filePaths = outputPaths[self.currentSession.keyword]
+		filePaths = outputPaths[self.currentSession.keywords]
 		thumbnail_files = []
 		for item in outputItems:
 			current_file = os.path.join(thumbnail_folder_path, item['image_filename'])
@@ -90,13 +109,14 @@ class GidGui:
 		for thumbnailFile in thumbnail_files:
 			loadImage = Image.open(thumbnailFile)
 			renderImage = ImageTk.PhotoImage(loadImage)
-			imageLabels.append(Label(self.main_frame, image = renderImage))
+			imageLabels.append(Label(self.preview_frame, image = renderImage))
 			imageLabels[gridCount].image = renderImage
-			if gridCount < 4:
-				imageLabels[gridCount].grid(row = 2, column = gridCount)
+			if gridCount < (self.rows * self.columns):
+				imageLabels[gridCount].grid(row = gridCount // self.columns, column = gridCount % self.columns, padx = 5, pady = 5)
 			gridCount = gridCount + 1
-		self.gidData.storeSearch(outputItems, thumbnail_folder_path)						
-		return thumbnail_files
+		self.gidData.storeSearch(outputItems, thumbnail_folder_path)
+		#return thumbnail_files						
+		return True
 
 	def removeFile(self, file):
 		try:
@@ -129,6 +149,9 @@ class GidGui:
 		main_frame = Frame(root)
 		main_frame.pack_propagate(False)
 		main_frame.pack(fill = BOTH, expand = True)
+		# Preview frame
+		preview_frame = Frame(root)
+		preview_frame.pack(fill = BOTH, expand = True)
 		# Status bar
 		status_bar = Label(root, text = "Ready", bd = 1, relief = SUNKEN, anchor = W)
 		status_bar.pack(side = BOTTOM, fill = X)
@@ -142,9 +165,11 @@ class GidGui:
 		keyword_entry.grid(row = 0, column = 1, columnspan = 2)
 		preview_button.grid(row = 1, column = 0)
 		start_button.grid(row = 1, column = 1)
-		cancel_button.grid(row = 1, column = 2)		
+		cancel_button.grid(row = 1, column = 2)
 
+		self.keyword_entry = keyword_entry
 		self.main_form = root
 		self.main_frame = main_frame
+		self.preview_frame = preview_frame
 
 		root.mainloop()
