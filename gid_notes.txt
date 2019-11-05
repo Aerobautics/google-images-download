@@ -1,19 +1,22 @@
 XML Format
 
-<gid>
-	<session>
-		<search>
-			<picture isthumbnail="false">
-				<location>
-				</location>
-				<provenance>
-				</provenance>
-				<thumbnail>
-				</thumbnail>
-			</picture>
-		</search>
-	</session>
-</gid>
+<session>
+ <search identity="12345">
+  <setting>
+
+  </setting>
+  <result>
+   <picture thumbnail="false">
+    <location></location>
+    <provenance></provenance>
+   </picture>
+   <picture thumbnail="true">
+    <location></location>
+    <provenance></provnenance>
+   </picture>
+  </result>
+ </search>
+</session>
 
 TODO
 
@@ -30,3 +33,5 @@ TODO
 (3.) Tasks (uncategorized)
 	(a.) Display session tree
 	(b.) Display directories and size consumed
+	(c.) Hash verification of downloaded images
+	(d.) Integrate image scraper

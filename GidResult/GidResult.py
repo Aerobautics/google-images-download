@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Written by Stewart Nash (Aerobautics) November 2019
-"""This file contains the GID Picture class. This class
-holds all information related to an individual image.
+"""Provides a a result class for results in a search.
+This was formerly a GidPicture class, but that was deemed too granular.
 """
 from tkinter import *
 import PIL
@@ -19,11 +19,8 @@ from google_images_download import google_images_download
 
 # GID stands for 'Google Image Downloader'
 
-class GidPicture:
-	'This class encapsulates all of the information owned by an individual image.'
+class GidResult:
+	'This class encapsulates all of the information owned by an individual search result.'
 	def __init__(self):
-		self.thumbnail = False
-		self.location = []
-		self.provenance = []
-		self.provenance_size = []
-		self.provenance_type = []
+		self.picture = [] #GidPicture()
+		self.thumbnail = [] #GidPicture()

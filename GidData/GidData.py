@@ -28,23 +28,26 @@ class GidData:
 		self._currentSession = value
 
 	def createXmlString(self, input_items, input_directory):
-		xmlString = '<?xml version="1.0" encoding="UTF-8"?>\n'
-		xmlString = xmlString + '<gid>\n' 			
-		xmlString = xmlString + '\t<session>\n'
-		xmlString = xmlString + '\t\t<search keyword="' + self._currentSession.keywords
-		xmlString = xmlString + '">\n'
+		xmlString = '<?xml version="1.0" encoding="UTF-8"?>\n'		
+		xmlString = xmlString + '<session>\n'
+		xmlString = xmlString + '\t<search>\n'
+		xmlString = xmlString + '\t\t<setting>\n'
+		xmlString = xmlString + '\t\t\t<keyword>' + self._currentSession.keywords
+		xmlString = xmlString + '</keyword>\n'
+		xmlString = xmlString + '\t\t</setting>\n'
 		for item in input_items:
-			xmlString = xmlString + '\t\t\t<picture isthumbnail="true">\n'
-			xmlString = xmlString + '\t\t\t\t<filename>'
+			xmlString = xmlString + '\t\t<result>'
+			xmlString = xmlString + '\t\t\t<picture thumbnail="true">\n'
+			xmlString = xmlString + '\t\t\t\t<location>'
 			xmlString = xmlString + os.path.join(input_directory, item['image_filename']).replace('&', '&amp;')
-			xmlString = xmlString + '</filename>\n'
+			xmlString = xmlString + '</location>\n'
 			xmlString = xmlString + '\t\t\t\t<provenance>'
 			xmlString = xmlString + item['image_link'].replace('&', '&amp;')
 			xmlString = xmlString + '</provenance>\n'			
 			xmlString = xmlString + '\t\t\t</picture>\n'
-		xmlString = xmlString + '\t\t</search>\n'
-		xmlString = xmlString + '\t</session>\n'
-		xmlString = xmlString + '</gid>'
+			xmlString = xmlString + '\t\t</result>\n'
+		xmlString = xmlString + '\t</search>\n'
+		xmlString = xmlString + '</session>\n'
 		return xmlString
 
 	def readSession(self):
@@ -59,7 +62,7 @@ class GidData:
 			collection = DOMTree.documentElement
 			pictures = collection.getElementsByTagName("picture")
 			for picture in pictures:
-				filename = picture.getElementsByTagName("filename")[0]
+				filename = picture.getElementsByTagName("location")[0]
 				filenames.append(filename.childNodes[0].data) 
 				#print("readXmlString {}".format(filenames))
 		else:

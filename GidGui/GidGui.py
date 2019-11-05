@@ -17,24 +17,33 @@ from GidData import GidData
 from GidSession import GidSession
 
 #https://tkdocs.com/index.html
+#http://effbot.org/tkinterbook/
 
 # GID stands for 'Google Image Downloader'
 
 class GidGui:
 	'This class contains the main GUI window used by the application.'
+	current_settings = GidSettings()
+
 	def __init__(self):
 		self.rows = 3
 		self.columns = 3
 		self.pages = 100
+		self.current_page = 0
+
+
 		self.gidSession = []
 		self.keyword_entry = []
+		self.limit_entry = []
 		self.sessionList = []
 		self.main_form = []
 		self.main_frame = []
 		self.preview_frame = []
+
 		self.currentSession = GidSession.GidSession()
-		self.currentSession.keywords = "polar bear"
-		self.currentSession.thumbnail_only = True
+		self.current_settings.keywords = "polar bear"
+		self.current_settings.thumbnail = True
+
 		self.gidData = GidData.GidData()
 		self.gidData.set_currentSession(self.currentSession)
 
@@ -43,6 +52,12 @@ class GidGui:
 
 	def defaultFunction(self):
 		print("Google Images Download")
+
+	def nextPage(self):
+		print("Go to next page")
+
+	def previousPage(self):
+		print("Go to previous page")
 
 	def populateCurrentSession(self, keyword = None, limit = None, thumbnail = None):
 		if keyword is not None:
@@ -158,16 +173,27 @@ class GidGui:
 		# Search area
 		keyword_label = Label(main_frame, text = "Keyword: ")
 		keyword_entry = Entry(main_frame)
+		limit_label = Label(main_frame, text = "Limit: ")
+		limit_entry = Entry(main_frame, justify = RIGHT)
+		limit_entry.insert(0, "5")
 		preview_button = Button(main_frame, text = "Preview", command = self.previewDownload)
 		start_button = Button(main_frame, text = "Start", command = self.defaultFunction)
 		cancel_button = Button(main_frame, text = "Cancel", command = self.defaultFunction)
+		previous_button = Button(main_frame, text = "Previous", command = self.previousPage)
+		next_button = Button(main_frame, text = "Next", command = self.nextPage)
+
 		keyword_label.grid(row = 0, sticky = E)
 		keyword_entry.grid(row = 0, column = 1, columnspan = 2)
 		preview_button.grid(row = 1, column = 0)
 		start_button.grid(row = 1, column = 1)
 		cancel_button.grid(row = 1, column = 2)
+		limit_label.grid(row = 0, column = 3)
+		limit_entry.grid(row = 0, column = 4)
+		previous_button.grid(row = 2, column = 0)
+		next_button.grid(row = 2, column = 1)
 
 		self.keyword_entry = keyword_entry
+		self.limit_entry = limit_entry
 		self.main_form = root
 		self.main_frame = main_frame
 		self.preview_frame = preview_frame
