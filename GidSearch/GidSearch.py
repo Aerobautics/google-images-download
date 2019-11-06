@@ -18,8 +18,9 @@ class GidSearch:
 	currentIndex = 0
 
 	def __init__(self, input_settings = GidSettings()):
-		self.gidResults = [] #GidResult() xN
-		self.identity = [] #uuid.uuid()
+		#self.gidResults = [] #GidResult() xN
+		self.results = None #GidResult() xN
+		self.identity = None #uuid.uuid()
 		#self.uniqueIdentifier = self.identity
 		self.currentPictureIndex = 0
 		self.settings = input_settings #GidSettings()

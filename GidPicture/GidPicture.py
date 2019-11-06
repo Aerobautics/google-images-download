@@ -27,3 +27,5 @@ class GidPicture:
 		self.provenance = []
 		self.provenance_size = []
 		self.provenance_type = []
+		self.alternate = []
+		self.note = []

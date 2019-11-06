@@ -31,7 +31,7 @@ class GidSettings:
 		self.usage_rights = None
 		self.size = None
 		self.exact_size = None
-		self.aspect_ration = None
+		self.aspect_ratio = None
 		self.type = None
 		self.time = None
 		self.time_range = None

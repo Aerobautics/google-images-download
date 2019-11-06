@@ -18,7 +18,8 @@ class GidData:
 	def __init__(self):
 		self.gidSession = []
 		self.sessionList = []
-		self._currentSession = []
+		self._currentSession = None
+		self.searchList = []
 		self.sessionFile = []
 
 	def get_currentSession(self):
@@ -50,6 +51,182 @@ class GidData:
 		xmlString = xmlString + '</session>\n'
 		return xmlString
 
+	def populateSearch(self, search):
+		setting = GidSettings()
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("keywords")
+		if temporary:
+			setting.keywords = temporary.childNodes[0].data
+			print(setting.keywords)
+		temporary = search.getElementsByTagName("keywords_from_file")
+		if temporary:
+			setting.keywords_from_file = temporary.childNodes[0].data
+			print(setting.keywords_from_file)		
+		temporary = search.getElementsByTagName("prefix_keywords")
+		if temporary:
+			setting.prefix_keywords = temporary.childNodes[0].data
+			print(setting.prefix_keywords)
+		temporary = search.getElementsByTagName("suffix_keywords")
+		if temporary:
+			setting.suffix_keywords = temporary.childNodes[0].data
+			print(setting.suffix_keywords)
+		temporary = search.getElementsByTagName("limit")
+		if temporary:
+			setting.limit = temporary.childNodes[0].data
+			print(setting.limit)
+		temporary = search.getElementsByTagName("related_images")
+		if temporary:
+			setting.related_images = temporary.childNodes[0].data
+			print(setting.related_images)
+		temporary = search.getElementsByTagName("format")
+		if temporary:
+			setting.format = temporary.childNodes[0].data
+			print(setting.format)
+		temporary = search.getElementsByTagName("color")
+		if temporary:
+			setting.color = temporary.childNodes[0].data
+			print(setting.color)
+		temporary = search.getElementsByTagName("color_type")
+		if temporary:
+			setting.color_type = temporary.childNodes[0].data
+			print(setting.color_type)
+		temporary = search.getElementsByTagName("usage_rights")
+		if temporary:
+			setting.usage_rights = temporary.childNodes[0].data
+			print(setting.usage_rights)
+		temporary = search.getElementsByTagName("size")
+		if temporary:
+			setting.size = temporary.childNodes[0].data
+			print(setting.size)		
+		temporary = search.getElementsByTagName("exact_size")
+		if temporary:
+			setting.exact_size = temporary.childNodes[0].data
+			print(setting.exact_size)
+		temporary = search.getElementsByTagName("aspect_ratio")
+		if temporary:
+			setting.aspect_ratio = temporary.childNodes[0].data
+			print(setting.aspect_ratio)
+		temporary = search.getElementsByTagName("type")
+		if temporary:
+			setting.type = temporary.childNodes[0].data
+			print(setting.type)
+		temporary = search.getElementsByTagName("time")
+		if temporary:
+			setting.time = temporary.childNodes[0].data
+			print(setting.time)
+		temporary = search.getElementsByTagName("delay")
+		if temporary:
+			setting.delay = temporary.childNodes[0].data
+			print(setting.delay)
+		temporary = search.getElementsByTagName("url")
+		if temporary:
+			setting.url = temporary.childNodes[0].data
+			print(setting.url)
+		temporary = search.getElementsByTagName("single_image")
+		if temporary:
+			setting.single_image = temporary.childNodes[0].data
+			print(setting.single_image)
+		temporary = search.getElementsByTagName("output_directory")
+		if temporary:
+			setting.output_directory = temporary.childNodes[0].data
+			print(setting.output_directory)
+		temporary = search.getElementsByTagName("image_directory")
+		if temporary:
+			setting.image_directory = temporary.childNodes[0].data
+			print(setting.image_directory)		
+		temporary = search.getElementsByTagName("no_directory")
+		if temporary:
+			setting.no_directory = temporary.childNodes[0].data
+			print(setting.no_directory)
+		temporary = search.getElementsByTagName("proxy")
+		if temporary:
+			setting.proxy = temporary.childNodes[0].data
+			print(setting.proxy)
+		temporary = search.getElementsByTagName("similar_images")
+		if temporary:
+			setting.similar_images = temporary.childNodes[0].data
+			print(setting.similar_images)
+		temporary = search.getElementsByTagName("specific_site")
+		if temporary:
+			setting.specific_site = temporary.childNodes[0].data
+			print(setting.specific_site)
+		temporary = search.getElementsByTagName("print_urls")
+		if temporary:
+			setting.print_urls = temporary.childNodes[0].data
+			print(setting.print_urls)
+		temporary = search.getElementsByTagName("print_size")
+		if temporary:
+			setting.print_size = temporary.childNodes[0].data
+			print(setting.print_size)
+		temporary = search.getElementsByTagName("print_paths")
+		if temporary:
+			setting.print_paths = temporary.childNodes[0].data
+			print(setting.print_paths)
+		temporary = search.getElementsByTagName("metadata")
+		if temporary:
+			setting.metadata = temporary.childNodes[0].data
+			print(setting.metadata)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		temporary = search.getElementsByTagName("config_file")
+		if temporary:
+			setting.config_file = temporary.childNodes[0].data
+			print(setting.config_file)
+		return search
+
 	def readSession(self):
 		# Open XML document using the minidom parser
 		filenames = []
@@ -59,15 +236,27 @@ class GidData:
 		#print("[GidData.readSession()] session_location = {}".format(session_location))
 		if os.path.exists(session_location):
 			DOMTree = xml.dom.minidom.parse(session_location)
+			self._currentSession = DOMTree
 			collection = DOMTree.documentElement
 			pictures = collection.getElementsByTagName("picture")
 			for picture in pictures:
 				filename = picture.getElementsByTagName("location")[0]
-				filenames.append(filename.childNodes[0].data) 
+				filenames.append(filename.childNodes[0].data)
 				#print("readXmlString {}".format(filenames))
 		else:
 			print("../temp/session.gid does not exist.")
-		return filenames
+		return DOMTree
+
+	def readSearchList(self):
+		if self._currentSession is not None:
+			DOMTree = self._currentSession
+			collection = DOMTree.documentElement
+			searches = collection.getElementsByTagName("search")
+			for search in searches:
+				self.searchList.append(self.populateSearch(search))
+		#return self.searchList
+			
+		
 
 	def storeSearch(self, output_items, thumbnail_folder_path):
 		session_location = os.path.join(os.path.realpath('.'), 'temp')
