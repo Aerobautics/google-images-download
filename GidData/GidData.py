@@ -169,63 +169,70 @@ class GidData:
 		if temporary:
 			setting.metadata = temporary.childNodes[0].data
 			print(setting.metadata)
-		temporary = search.getElementsByTagName("config_file")
+		temporary = search.getElementsByTagName("extract_metadata")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.extract_metadata = temporary.childNodes[0].data
+			print(setting.extract_metadata)
+		temporary = search.getElementsByTagName("socket_timeout")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.socket_timeout = temporary.childNodes[0].data
+			print(setting.socket_timeout)
+		temporary = search.getElementsByTagName("thumbnail")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.thumbnail = temporary.childNodes[0].data
+			print(setting.thumbnail)
+		temporary = search.getElementsByTagName("thumbnail_only")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.thumbnail_only = temporary.childNodes[0].data
+			print(setting.thumbnail_only)
+		temporary = search.getElementsByTagName("language")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.language = temporary.childNodes[0].data
+			print(setting.language)
+		temporary = search.getElementsByTagName("prefix")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.prefix = temporary.childNodes[0].data
+			print(setting.prefix)
+		temporary = search.getElementsByTagName("chromedriver")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.chromedriver = temporary.childNodes[0].data
+			print(setting.chromedriver)
+		temporary = search.getElementsByTagName("safe_search")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.safe_search = temporary.childNodes[0].data
+			print(setting.safe_search)
+		temporary = search.getElementsByTagName("no_numbering")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.no_numbering = temporary.childNodes[0].data
+			print(setting.no_numbering)
+		temporary = search.getElementsByTagName("offset")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.offset = temporary.childNodes[0].data
+			print(setting.offset)
+		temporary = search.getElementsByTagName("save_source")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.save_source = temporary.childNodes[0].data
+			print(setting.save_source)
+		temporary = search.getElementsByTagName("no_download")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.no_download = temporary.childNodes[0].data
+			print(setting.no_download)
+		temporary = search.getElementsByTagName("silent_mode")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		temporary = search.getElementsByTagName("config_file")
+			setting.silent_mode = temporary.childNodes[0].data
+			print(setting.silent_mode)
+		temporary = search.getElementsByTagName("ignore_urls")
 		if temporary:
-			setting.config_file = temporary.childNodes[0].data
-			print(setting.config_file)
-		return search
+			setting.ignore_urls = temporary.childNodes[0].data
+			print(setting.ignore_urls)
+		temporary = search.getElementsByTagName("help")
+		if temporary:
+			setting.help = temporary.childNodes[0].data
+			print(setting.help)
+		output = GidSearch(setting)
+		if search.hasAttribute("identity"):
+			output.identity = search.getAttribute("identity")
+		return output
 
 	def readSession(self):
 		# Open XML document using the minidom parser

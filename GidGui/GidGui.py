@@ -14,7 +14,9 @@ import tkinter.messagebox
 sys.path.insert(1, '../')
 from google_images_download import google_images_download
 from GidData import GidData
+from GidSearch import GidSearch
 from GidSession import GidSession
+from GidSettings import GidSettings
 
 #https://tkdocs.com/index.html
 #http://effbot.org/tkinterbook/
@@ -23,7 +25,6 @@ from GidSession import GidSession
 
 class GidGui:
 	'This class contains the main GUI window used by the application.'
-	current_settings = GidSettings()
 
 	def __init__(self):
 		self.rows = 3
@@ -31,6 +32,7 @@ class GidGui:
 		self.pages = 100
 		self.current_page = 0
 
+		self.currentSettings = []
 
 		self.gidSession = []
 		self.keyword_entry = []
@@ -40,12 +42,19 @@ class GidGui:
 		self.main_frame = []
 		self.preview_frame = []
 
-		self.currentSession = GidSession.GidSession()
-		self.current_settings.keywords = "polar bear"
-		self.current_settings.thumbnail = True
+		self.currentSession = []
+		self.currentSearch = []
 
 		self.gidData = GidData.GidData()
-		self.gidData.set_currentSession(self.currentSession)
+		self.currentSession = GidSession.GidSession()
+		self.currentSearch = GidSearch.GidSearch()
+		self.currentSearch.settings.keywords = "polar bear"
+		self.currentSearch.settings.thumbnail = True
+		self.currentSearch.settings.limit = 10
+		#self.gidData.set_currentSession(self.currentSession)
+
+	#def initialization(self):
+
 
 	def getKeyword(self):
 		return self.keyword_entry.get()
@@ -59,24 +68,24 @@ class GidGui:
 	def previousPage(self):
 		print("Go to previous page")
 
-	def populateCurrentSession(self, keyword = None, limit = None, thumbnail = None):
+	def populateCurrentSearch(self, keyword = None, limit = None, thumbnail = None):
 		if keyword is not None:
-			self.currentSession.keywords = keyword
+			self.currentSearch.settings.keywords = keyword
 		if thumbnail is not None:
-			self.currentSession.thumbnail_only = thumbnail
+			self.currentSearch.settings.thumbnail_only = thumbnail
 		if limit is not None:
-			self.currentSession.limit = limit
+			self.currentSearch.settings.limit = limit
 
 	def previewDownload(self):
 		start_time = time.time()
 		if self.getKeyword() == "":
 			return False
-		self.populateCurrentSession(keyword = self.getKeyword(), limit = 8, thumbnail = True)
+		self.populateCurrentSearch(keyword = self.getKeyword(), limit = 8, thumbnail = True)
 		arguments = {
-			"keywords": self.currentSession.keywords,
-			"limit": self.currentSession.limit,
+			"keywords": self.currentSearch.settings.keywords,
+			"limit": self.currentSearch.settings.limit,
 			"print_urls": True,
-			"thumbnail_only": self.currentSession.thumbnail_only
+			"thumbnail_only": self.currentSearch.settings.thumbnail_only
 		}
 		try:
 			temp = arguments['output_folder']
@@ -84,14 +93,12 @@ class GidGui:
 			pass
 		else:
 			assert False, "This test checks download to default location yet an output folder was provided"
-
 		output_folder_path = os.path.join(os.path.realpath('.'), 'downloads', '{}'.format(arguments['keywords'].replace(' ', '_')))
 		thumbnail_folder_path = os.path.join(os.path.realpath('.'), 'downloads', '{}-thumbnail'.format(arguments['keywords'].replace(' ', '_')))
 		if os.path.exists(output_folder_path):
 			start_amount_of_files_in_output_folder = len([name for name in os.listdir(output_folder_path) if os.path.isfile(os.path.join(output_folder_path, name)) and os.path.getctime(os.path.join(output_folder_path, name)) < start_time])
 		else:
 			start_amount_of_files_in_output_folder = 0
-
 		response = google_images_download.googleimagesdownload()
 		outputPaths, outputErrors, outputItems = response.download(arguments)
 		print("outputPaths: {}".format(outputPaths))
@@ -105,7 +112,7 @@ class GidGui:
 			print(os.path.join(output_folder_path, file))
 
 		# assert end_amount_of_files_in_output_folder - start_amount_of_files_in_output_folder == arguments['limit']
-		if not self.currentSession.thumbnail_only:
+		if not self.currentSearch.settings.thumbnail_only:
 			assert end_amount_of_files_in_output_folder == arguments['limit']		
 		print("Cleaning up all files downloaded by test {}...".format(__name__))
 		for file in files_modified_after_test_started:
@@ -113,7 +120,7 @@ class GidGui:
 				print("Deleted {}".format(os.path.join(output_folder_path, file)))
 			else:
 				print("Failed to delete {}".format(os.path.join(output_folder_path, file)))
-		filePaths = outputPaths[self.currentSession.keywords]
+		filePaths = outputPaths[self.currentSearch.settings.keywords]
 		thumbnail_files = []
 		for item in outputItems:
 			current_file = os.path.join(thumbnail_folder_path, item['image_filename'])

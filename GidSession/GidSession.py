@@ -9,6 +9,8 @@ import time
 import uuid
 sys.path.insert(1, '../')
 from google_images_download import google_images_download
+from GidSettings import GidSettings
+from GidSearch import GidSearch
 
 #https://google-images-download.readthedocs.io/en/latest/index.html
 
@@ -21,7 +23,9 @@ class GidSession:
 	def __init__(self):
 		self.searches = [] #GidSearch() xN
 
-	def search(self, input_settings = GidSettings()):
+	def search(self, input_settings = GidSettings.GidSettings()):
+		#if input_settings is None:
+		#	input_settings = GidSettings()
 		newSearch = GidSearch(input_settings)
 		newSearch.identity = str(uuid.uuid4())
 		self.searches.append(newSearch)

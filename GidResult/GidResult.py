@@ -24,3 +24,14 @@ class GidResult:
 	def __init__(self):
 		self.picture = [] #GidPicture()
 		self.thumbnail = [] #GidPicture()
+
+		self.image_filename = []
+
+		self.image_format = []
+		self.image_height = []
+		self.image_width = []
+		self.image_link = []
+		self.image_description = []
+		self.image_host = []
+		self.image_source = []
+		self.image_thumbnail_url = []

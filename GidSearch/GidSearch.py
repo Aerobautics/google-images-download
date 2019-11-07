@@ -8,6 +8,7 @@ import errno
 import time
 sys.path.insert(1, '../')
 from google_images_download import google_images_download
+from GidSettings import GidSettings
 
 #https://google-images-download.readthedocs.io/en/latest/index.html
 
@@ -17,7 +18,9 @@ class GidSearch:
 	'This class contains information for a search performed in a GID session. It is used by the GID session and the GUI interface.'
 	currentIndex = 0
 
-	def __init__(self, input_settings = GidSettings()):
+	def __init__(self, input_settings = GidSettings.GidSettings()):
+		#if input_settings is None:
+		#	input_settings = GidSettings.GidSettings()
 		#self.gidResults = [] #GidResult() xN
 		self.results = None #GidResult() xN
 		self.identity = None #uuid.uuid()
