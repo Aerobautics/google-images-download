@@ -6,7 +6,7 @@ import sys
 import os
 import errno
 import time
-import uuid
+#import uuid
 sys.path.insert(1, '../')
 from google_images_download import google_images_download
 from GidSettings import GidSettings
@@ -27,7 +27,7 @@ class GidSession:
 		#if input_settings is None:
 		#	input_settings = GidSettings()
 		newSearch = GidSearch(input_settings)
-		newSearch.identity = str(uuid.uuid4())
+		#newSearch.identity = str(uuid.uuid4())
 		self.searches.append(newSearch)
 		
 

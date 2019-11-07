@@ -14,6 +14,7 @@ import tkinter.messagebox
 sys.path.insert(1, '../')
 from google_images_download import google_images_download
 from GidData import GidData
+from GidResult import GidResult
 from GidSearch import GidSearch
 from GidSession import GidSession
 from GidSettings import GidSettings
@@ -59,6 +60,12 @@ class GidGui:
 	def getKeyword(self):
 		return self.keyword_entry.get()
 
+	def getLimit(self):
+		limit = self.limit_entry.get()
+		if limit is not None:
+			limit = int(limit)
+		return limit
+
 	def defaultFunction(self):
 		print("Google Images Download")
 
@@ -80,7 +87,10 @@ class GidGui:
 		start_time = time.time()
 		if self.getKeyword() == "":
 			return False
-		self.populateCurrentSearch(keyword = self.getKeyword(), limit = 8, thumbnail = True)
+		if self.getLimit is not None:
+			self.populateCurrentSearch(keyword = self.getKeyword(), limit = self.getLimit(), thumbnail = True)
+		else:
+			self.populateCurrentSearch(keyword = self.getKeyword(), limit = 8, thumbnail = True)
 		arguments = {
 			"keywords": self.currentSearch.settings.keywords,
 			"limit": self.currentSearch.settings.limit,
@@ -101,16 +111,15 @@ class GidGui:
 			start_amount_of_files_in_output_folder = 0
 		response = google_images_download.googleimagesdownload()
 		outputPaths, outputErrors, outputItems = response.download(arguments)
-		print("outputPaths: {}".format(outputPaths))
+		#print("outputPaths: {}".format(outputPaths))
 		print("outputErrors: {}".format(outputErrors))
-		print("outputItems: {}".format(outputItems))
+		#print("outputItems: {}".format(outputItems))
 		files_modified_after_test_started = [name for name in os.listdir(output_folder_path) if os.path.isfile(os.path.join(output_folder_path, name)) and os.path.getmtime(os.path.join(output_folder_path, name)) > start_time]
 		end_amount_of_files_in_output_folder = len(files_modified_after_test_started)
 		#print(f"Files downloaded by test {__name__}:")
 		print("Files downloaded by test {}:".format(__name__))
 		for file in files_modified_after_test_started:
 			print(os.path.join(output_folder_path, file))
-
 		# assert end_amount_of_files_in_output_folder - start_amount_of_files_in_output_folder == arguments['limit']
 		if not self.currentSearch.settings.thumbnail_only:
 			assert end_amount_of_files_in_output_folder == arguments['limit']		
@@ -123,6 +132,7 @@ class GidGui:
 		filePaths = outputPaths[self.currentSearch.settings.keywords]
 		thumbnail_files = []
 		for item in outputItems:
+			self.currentSearch.addResult(GidResult.GidResult(item))
 			current_file = os.path.join(thumbnail_folder_path, item['image_filename'])
 			thumbnail_files.append(current_file)
 		imagePhotos = []
@@ -136,7 +146,7 @@ class GidGui:
 			if gridCount < (self.rows * self.columns):
 				imageLabels[gridCount].grid(row = gridCount // self.columns, column = gridCount % self.columns, padx = 5, pady = 5)
 			gridCount = gridCount + 1
-		self.gidData.storeSearch(outputItems, thumbnail_folder_path)
+		self.gidData.storeSearch(self.currentSearch, outputItems, thumbnail_folder_path)
 		#return thumbnail_files						
 		return True
 

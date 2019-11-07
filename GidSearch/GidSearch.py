@@ -6,6 +6,7 @@ import sys
 import os
 import errno
 import time
+import uuid
 sys.path.insert(1, '../')
 from google_images_download import google_images_download
 from GidSettings import GidSettings
@@ -23,8 +24,15 @@ class GidSearch:
 		#	input_settings = GidSettings.GidSettings()
 		#self.gidResults = [] #GidResult() xN
 		self.results = None #GidResult() xN
-		self.identity = None #uuid.uuid()
+		#self.identity = None #uuid.uuid()
+		self.identity = str(uuid.uuid4())
 		#self.uniqueIdentifier = self.identity
 		self.currentPictureIndex = 0
 		self.settings = input_settings #GidSettings()
+
+	def addResult(self, input_result):
+		if self.results is None:
+			self.results = [input_result, ]
+		else:
+			self.results.append(input_result)
 

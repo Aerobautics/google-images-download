@@ -73,6 +73,7 @@ XML Format
 </session>
 
 TODO
+(0.) TRANSLATE SESSION TO AND FROM XML!
 
 (1.) Package separate modules
 	(a.) Text processing - GidString

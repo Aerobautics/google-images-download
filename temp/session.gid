@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session>
+	<search identity="29b42457-cd3c-4ccf-a7a5-3f684f1062fe">
+		<setting>
+			<keyword>apple pie</keyword>
+		</setting>
+		<result>			<picture thumbnail="true">
+				<location>/home/stewart/google-images-download/downloads/apple_pie-thumbnail/exps6086_HB133235C07_19_4b_WEB.jpg</location>
+				<provenance>https://cdn3.tmbi.com/toh/GoogleImagesPostCard/exps6086_HB133235C07_19_4b_WEB.jpg</provenance>
+			</picture>
+		</result>
+		<result>			<picture thumbnail="true">
+				<location>/home/stewart/google-images-download/downloads/apple_pie-thumbnail/75593ed5-420b-4782-8eae-56bdfbc2586b.jpg</location>
+				<provenance>https://images-gmi-pmc.edge-generalmills.com/75593ed5-420b-4782-8eae-56bdfbc2586b.jpg</provenance>
+			</picture>
+		</result>
+		<result>			<picture thumbnail="true">
+				<location>/home/stewart/google-images-download/downloads/apple_pie-thumbnail/image?url=https%3A%2F%2Fimg1.southernliving.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2Fimage%2F2017%2F10%2Fmain%2Farkansas_black_apple_pie_with_caramel_sauce_2540501_pieso_675.jpg%3Fitok%3DiUlqw3oU&amp;w=450&amp;c=sc&amp;poi=face&amp;q=85</location>
+				<provenance>https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimg1.southernliving.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2Fimage%2F2017%2F10%2Fmain%2Farkansas_black_apple_pie_with_caramel_sauce_2540501_pieso_675.jpg%3Fitok%3DiUlqw3oU&amp;w=450&amp;c=sc&amp;poi=face&amp;q=85</provenance>
+			</picture>
+		</result>
+		<result>			<picture thumbnail="true">
+				<location>/home/stewart/google-images-download/downloads/apple_pie-thumbnail/173da066-c6b4-45dd-9b28-0d459cf6f169.jpg</location>
+				<provenance>https://images-gmi-pmc.edge-generalmills.com/173da066-c6b4-45dd-9b28-0d459cf6f169.jpg</provenance>
+			</picture>
+		</result>
+		<result>			<picture thumbnail="true">
+				<location>/home/stewart/google-images-download/downloads/apple_pie-thumbnail/2589601_mailb_mailbox_apple_pie_003.jpg?itok=XkbaosJ5</location>
+				<provenance>https://img1.southernliving.timeinc.net/sites/default/files/styles/medium_2x/public/image/2019/08/main/2589601_mailb_mailbox_apple_pie_003.jpg?itok=XkbaosJ5</provenance>
+			</picture>
+		</result>
+	</search>
+</session>

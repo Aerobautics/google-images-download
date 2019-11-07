@@ -19,6 +19,7 @@ class GidData:
 		self.gidSession = []
 		self.sessionList = []
 		self._currentSession = None
+		self.currentSearch = []
 		self.searchList = []
 		self.sessionFile = []
 
@@ -31,9 +32,10 @@ class GidData:
 	def createXmlString(self, input_items, input_directory):
 		xmlString = '<?xml version="1.0" encoding="UTF-8"?>\n'		
 		xmlString = xmlString + '<session>\n'
-		xmlString = xmlString + '\t<search>\n'
+		xmlString = xmlString + '\t<search identity=\"'
+		xmlString = xmlString + self.currentSearch.identity + '\">\n'
 		xmlString = xmlString + '\t\t<setting>\n'
-		xmlString = xmlString + '\t\t\t<keyword>' + self._currentSession.keywords
+		xmlString = xmlString + '\t\t\t<keyword>' + self.currentSearch.settings.keywords
 		xmlString = xmlString + '</keyword>\n'
 		xmlString = xmlString + '\t\t</setting>\n'
 		for item in input_items:
@@ -264,8 +266,9 @@ class GidData:
 		#return self.searchList
 			
 		
-
-	def storeSearch(self, output_items, thumbnail_folder_path):
+	# Remove output_items and thumbnail_folder_path parameters
+	def storeSearch(self, search, output_items, thumbnail_folder_path):
+		self.currentSearch = search
 		session_location = os.path.join(os.path.realpath('.'), 'temp')
 		session_location = os.path.join(session_location, 'session.gid')
 		session_location = os.path.abspath(session_location)
