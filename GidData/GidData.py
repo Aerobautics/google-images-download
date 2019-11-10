@@ -4,6 +4,7 @@
 """
 from tkinter import *
 from xml.dom.minidom import parse
+from xml.dom.minidom import getDOMImplementation
 import sys
 import os
 import errno
@@ -39,7 +40,7 @@ class GidData:
 		xmlString = xmlString + '</keyword>\n'
 		xmlString = xmlString + '\t\t</setting>\n'
 		for item in input_items:
-			xmlString = xmlString + '\t\t<result>'
+			xmlString = xmlString + '\t\t<result>\n'
 			xmlString = xmlString + '\t\t\t<picture thumbnail="true">\n'
 			xmlString = xmlString + '\t\t\t\t<location>'
 			xmlString = xmlString + os.path.join(input_directory, item['image_filename']).replace('&', '&amp;')
@@ -267,14 +268,217 @@ class GidData:
 			
 		
 	# Remove output_items and thumbnail_folder_path parameters
-	def storeSearch(self, search, output_items, thumbnail_folder_path):
-		self.currentSearch = search
+	#def storeSearch(self, search, output_items, thumbnail_folder_path):
+	#	self.currentSearch = search
+	#	session_location = os.path.join(os.path.realpath('.'), 'temp')
+	#	session_location = os.path.join(session_location, 'session.gid')
+	#	session_location = os.path.abspath(session_location)
+	#	#print("[GidData.storeSearch()] session_location = {}".format(session_location))
+	#	self.sessionFile = open(session_location, "w")
+	#	xmlString = self.createXmlString(output_items, thumbnail_folder_path)
+	#	self.sessionFile.write(xmlString)
+	#	self.sessionFile.close()
+
+	def storeSearch(self, inputSearch, searchLocation):
+		implementation = getDOMImplementation()
+		document = implementation.createDocument(None, "gid", None)
+		DOMTree = document
+		temporary_child = self.translateSearch(inputSearch)
+		DOMTree.documentElement.appendChild(temporary_child)
+		self.writeSearch(DOMTree, searchLocation)
+
+	def storeSession(self, inputSession):
+		implementation = getDOMImplementation()
+		document = implementation.createDocument(None, "gid", None)
+		DOMTree = document
+		temporary_child = self.translateSession(inputSession)
+		DOMTree.documentElement.appendChild(temporary_child)
+		self.writeSession(DOMTree)
+
+	def translatePicture(self, inputPicture):
+		implementation = getDOMImplementation()
+		document = implementation.createDocument(None, "gid", None)
+		DOMTree = document
+		temporary_child = DOMTree.createElement('picture')
+		if inputPicture.thumbnail:
+			temporary_child.setAttribute('thumbnail', 'true')
+		else:
+			temporary_child.setAttribute('thumbnail', 'false')
+		sub_child = DOMTree.createElement('location')
+		if inputPicture.location is not None:
+			text_node = DOMTree.createTextNode(inputPicture.location)
+			sub_child.appendChild(text_node)
+		temporary_child.appendChild(sub_child)
+		sub_child = DOMTree.createElement('provenance')
+		if inputPicture.provenance is not None:
+			text_node = DOMTree.createTextNode(inputPicture.provenance)
+			sub_child.appendChild(text_node)
+		temporary_child.appendChild(sub_child)
+		if inputPicture.note:
+			sub_child = DOMTree.createElement('note')
+			text_node = DOMTree.createTextNode(inputPicture.note)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputPicture.alternate:
+			sub_child = DOMTree.createElement('alternate')
+			text_node = DOMTree.createTextNode(inputPicture.alternate)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputPicture.provenance_size:
+			sub_child = DOMTree.createElement('provenance_size')
+			text_node = DOMTree.createTextNode(inputPicture.provenance_size)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputPicture.provenance_type:
+			sub_child = DOMTree.createElement('provenance_type')
+			text_node = DOMTree.createTextNode(inputPicture.provenance_type)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		return temporary_child
+
+	def translateResult(self, inputResult):
+		implementation = getDOMImplementation()
+		document = implementation.createDocument(None, "gid", None)
+		DOMTree = document
+		temporary_child = DOMTree.createElement('result')
+		if inputResult.image_filename is not None:
+			sub_child = DOMTree.createElement('image_filename')
+			text_node = DOMTree.createTextNode(inputResult.image_filename)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputResult.image_format is not None:
+			sub_child = DOMTree.createElement('image_format')
+			text_node = DOMTree.createTextNode(inputResult.image_format)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)		
+		if inputResult.image_height is not None:
+			sub_child = DOMTree.createElement('image_height')
+			text_node = DOMTree.createTextNode(str(inputResult.image_height))
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputResult.image_width is not None:
+			sub_child = DOMTree.createElement('image_width')
+			text_node = DOMTree.createTextNode(str(inputResult.image_width))
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputResult.image_link is not None:
+			sub_child = DOMTree.createElement('image_link')
+			text_node = DOMTree.createTextNode(inputResult.image_link)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputResult.image_description is not None:
+			sub_child = DOMTree.createElement('image_description')
+			text_node = DOMTree.createTextNode(inputResult.image_description)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputResult.image_host is not None:
+			sub_child = DOMTree.createElement('image_host')
+			text_node = DOMTree.createTextNode(inputResult.image_host)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputResult.image_source is not None:
+			sub_child = DOMTree.createElement('image_source')
+			text_node = DOMTree.createTextNode(inputResult.image_source)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputResult.image_thumbnail_url is not None:
+			sub_child = DOMTree.createElement('image_thumbnail_url')
+			text_node = DOMTree.createTextNode(inputResult.image_thumbnail_url)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputResult.thumbnail is not None:
+			sub_child = self.translatePicture(inputResult.thumbnail)
+			temporary_child.appendChild(sub_child)
+		if inputResult.picture is not None:
+			sub_child = self.translatePicture(inputResult.picture)
+			temporary_child.appendChild(sub_child)
+		return temporary_child
+
+	def translateSearch(self, inputSearch):
+		implementation = getDOMImplementation()
+		document = implementation.createDocument(None, "gid", None)
+		DOMTree = document
+		temporary_child = DOMTree.createElement('search')
+		temporary_child.setAttribute("identity", inputSearch.identity)
+		sub_child = self.translateSetting(inputSearch.settings)
+		temporary_child.appendChild(sub_child)
+		for result in inputSearch.results:
+			sub_child = self.translateResult(result)
+			temporary_child.appendChild(sub_child)
+		return temporary_child
+
+	def translateSession(self, inputSession):
+		implementation = getDOMImplementation()
+		document = implementation.createDocument(None, "gid", None)
+		DOMTree = document
+		temporary_child = DOMTree.createElement('session')
+		for search in inputSession.searches:
+			sub_child = self.translateSearch(search)
+			temporary_child.appendChild(sub_child)
+		return temporary_child		
+
+	def translateSetting(self, inputSetting):
+		implementation = getDOMImplementation()
+		document = implementation.createDocument(None, "gid", None)
+		DOMTree = document
+		temporary_child = DOMTree.createElement('result')
+		if inputSetting.config_file is not None:
+			sub_child = DOMTree.createElement('config_file')
+			text_node = DOMTree.createTextNode(inputSetting.config_file)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputSetting.keywords is not None:
+			sub_child = DOMTree.createElement('keywords')
+			text_node = DOMTree.createTextNode(inputSetting.keywords)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)			
+		if inputSetting.keywords_from_file is not None:
+			sub_child = DOMTree.createElement('keywords_from_file')
+			text_node = DOMTree.createTextNode(inputSetting.keywords_from_file)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputSetting.prefix_keywords is not None:
+			sub_child = DOMTree.createElement('prefix_keywords')
+			text_node = DOMTree.createTextNode(inputSetting.prefix_keywords)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputSetting.suffix_keywords is not None:
+			sub_child = DOMTree.createElement('suffix_keywords')
+			text_node = DOMTree.createTextNode(inputSetting.suffix_keywords)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputSetting.limit is not None:
+			sub_child = DOMTree.createElement('limit')
+			text_node = DOMTree.createTextNode(str(inputSetting.limit))
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputSetting.related_images is not None:
+			sub_child = DOMTree.createElement('related_images')
+			text_node = DOMTree.createTextNode(inputSetting.related_images)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputSetting.format is not None:
+			sub_child = DOMTree.createElement('format')
+			text_node = DOMTree.createTextNode(inputSetting.format)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		if inputSetting.color is not None:
+			sub_child = DOMTree.createElement('color')
+			text_node = DOMTree.createTextNode(inputSetting.color)
+			sub_child.appendChild(text_node)
+			temporary_child.appendChild(sub_child)
+		return temporary_child
+					
+
+	def writeSearch(self, DOMTree, searchLocation):
+		output_file = open(searchLocation, "w")
+		DOMTree.writexml(output_file, indent = "\t", addindent = "\t", newline = '\n')
+
+	def writeSession(self, DOMTree):
 		session_location = os.path.join(os.path.realpath('.'), 'temp')
 		session_location = os.path.join(session_location, 'session.gid')
 		session_location = os.path.abspath(session_location)
-		#print("[GidData.storeSearch()] session_location = {}".format(session_location))
-		self.sessionFile = open(session_location, "w")
-		xmlString = self.createXmlString(output_items, thumbnail_folder_path)
-		self.sessionFile.write(xmlString)
-		self.sessionFile.close()
+		output_file = open(session_location, "w")
+		DOMTree.writexml(output_file, indent = "\t", addindent = "\t", newl = '\n')
+		
 

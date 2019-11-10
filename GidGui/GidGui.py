@@ -83,6 +83,10 @@ class GidGui:
 		if limit is not None:
 			self.currentSearch.settings.limit = limit
 
+	def populateCurrentSession(self, inputSearches):
+		for search in inputSearches:
+			self.currentSession.addSearch(search)
+
 	def previewDownload(self):
 		start_time = time.time()
 		if self.getKeyword() == "":
@@ -146,7 +150,9 @@ class GidGui:
 			if gridCount < (self.rows * self.columns):
 				imageLabels[gridCount].grid(row = gridCount // self.columns, column = gridCount % self.columns, padx = 5, pady = 5)
 			gridCount = gridCount + 1
-		self.gidData.storeSearch(self.currentSearch, outputItems, thumbnail_folder_path)
+		#self.gidData.storeSearch(self.currentSearch, outputItems, thumbnail_folder_path)
+		self.currentSession.addSearch(self.currentSearch)
+		self.gidData.storeSession(self.currentSession)
 		#return thumbnail_files						
 		return True
 

@@ -9,6 +9,7 @@ import time
 import uuid
 sys.path.insert(1, '../')
 from google_images_download import google_images_download
+from GidResult import GidResult
 from GidSettings import GidSettings
 
 #https://google-images-download.readthedocs.io/en/latest/index.html
@@ -35,4 +36,11 @@ class GidSearch:
 			self.results = [input_result, ]
 		else:
 			self.results.append(input_result)
+
+	def addItems(self, inputItems):
+		for item in inputItems:
+			if self.results is None:
+				self.results = [GidResults(item), ]
+			else:
+				self.results.append(GidResults(item))
 

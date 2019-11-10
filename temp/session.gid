@@ -1,33 +1,66 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session>
-	<search identity="29b42457-cd3c-4ccf-a7a5-3f684f1062fe">
-		<setting>
-			<keyword>apple pie</keyword>
-		</setting>
-		<result>			<picture thumbnail="true">
-				<location>/home/stewart/google-images-download/downloads/apple_pie-thumbnail/exps6086_HB133235C07_19_4b_WEB.jpg</location>
-				<provenance>https://cdn3.tmbi.com/toh/GoogleImagesPostCard/exps6086_HB133235C07_19_4b_WEB.jpg</provenance>
-			</picture>
-		</result>
-		<result>			<picture thumbnail="true">
-				<location>/home/stewart/google-images-download/downloads/apple_pie-thumbnail/75593ed5-420b-4782-8eae-56bdfbc2586b.jpg</location>
-				<provenance>https://images-gmi-pmc.edge-generalmills.com/75593ed5-420b-4782-8eae-56bdfbc2586b.jpg</provenance>
-			</picture>
-		</result>
-		<result>			<picture thumbnail="true">
-				<location>/home/stewart/google-images-download/downloads/apple_pie-thumbnail/image?url=https%3A%2F%2Fimg1.southernliving.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2Fimage%2F2017%2F10%2Fmain%2Farkansas_black_apple_pie_with_caramel_sauce_2540501_pieso_675.jpg%3Fitok%3DiUlqw3oU&amp;w=450&amp;c=sc&amp;poi=face&amp;q=85</location>
-				<provenance>https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimg1.southernliving.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2Fimage%2F2017%2F10%2Fmain%2Farkansas_black_apple_pie_with_caramel_sauce_2540501_pieso_675.jpg%3Fitok%3DiUlqw3oU&amp;w=450&amp;c=sc&amp;poi=face&amp;q=85</provenance>
-			</picture>
-		</result>
-		<result>			<picture thumbnail="true">
-				<location>/home/stewart/google-images-download/downloads/apple_pie-thumbnail/173da066-c6b4-45dd-9b28-0d459cf6f169.jpg</location>
-				<provenance>https://images-gmi-pmc.edge-generalmills.com/173da066-c6b4-45dd-9b28-0d459cf6f169.jpg</provenance>
-			</picture>
-		</result>
-		<result>			<picture thumbnail="true">
-				<location>/home/stewart/google-images-download/downloads/apple_pie-thumbnail/2589601_mailb_mailbox_apple_pie_003.jpg?itok=XkbaosJ5</location>
-				<provenance>https://img1.southernliving.timeinc.net/sites/default/files/styles/medium_2x/public/image/2019/08/main/2589601_mailb_mailbox_apple_pie_003.jpg?itok=XkbaosJ5</provenance>
-			</picture>
-		</result>
-	</search>
-</session>
+<?xml version="1.0" ?>
+	<gid>
+		<session>
+			<search identity="4c3755d9-437e-4185-94cc-02f98c8d1146">
+				<result>
+					<keywords>polar bear</keywords>
+					<limit>5</limit>
+				</result>
+				<result>
+					<image_filename>Polar_Bear_-_Alaska_%28cropped%29.jpg</image_filename>
+					<image_format>jpg</image_format>
+					<image_height>565</image_height>
+					<image_width>563</image_width>
+					<image_link>https://upload.wikimedia.org/wikipedia/commons/6/66/Polar_Bear_-_Alaska_%28cropped%29.jpg</image_link>
+					<image_description>Polar bear - Wikipedia</image_description>
+					<image_host>en.wikipedia.org</image_host>
+					<image_source>https://en.wikipedia.org/wiki/Polar_bear</image_source>
+					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxVs0LN4Hvlm0sKTNaDrVdspfaJelij5X_q2mCf8Qtwbg7E2Mv&amp;s</image_thumbnail_url>
+				</result>
+				<result>
+					<image_filename>polar-bear-hero.jpg?1345901694</image_filename>
+					<image_format>jpg</image_format>
+					<image_height>480</image_height>
+					<image_width>640</image_width>
+					<image_link>https://c402277.ssl.cf1.rackcdn.com/photos/2330/images/hero_small/polar-bear-hero.jpg?1345901694</image_link>
+					<image_description>Polar Bear | Species | WWF</image_description>
+					<image_host>worldwildlife.org</image_host>
+					<image_source>https://www.worldwildlife.org/species/polar-bear</image_source>
+					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgWohk4K9qpVs5iYDSRyWrwIzeMG7pYavUJFl36qg-Jl91RGqhSQ&amp;s</image_thumbnail_url>
+				</result>
+				<result>
+					<image_filename>tnc_17745326_preview-1260x708.jpg</image_filename>
+					<image_format>jpg</image_format>
+					<image_height>708</image_height>
+					<image_width>1260</image_width>
+					<image_link>https://19mvmv3yn2qc2bdb912o1t2n-wpengine.netdna-ssl.com/science/files/2013/12/tnc_17745326_preview-1260x708.jpg</image_link>
+					<image_description>Will Polar Bears Die Out Because of Climate Change?</image_description>
+					<image_host>blog.nature.org</image_host>
+					<image_source>https://blog.nature.org/science/2013/12/03/what-science-polar-bear/</image_source>
+					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbGo4JgIodOegsRVjKFSkJpUR3ejofFUw8OWzid6oU2Gz_o-Yp&amp;s</image_thumbnail_url>
+				</result>
+				<result>
+					<image_filename>photo-1553425300-8bd56360f8eb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;w=1000&amp;q=80</image_filename>
+					<image_format></image_format>
+					<image_height>596</image_height>
+					<image_width>1000</image_width>
+					<image_link>https://images.unsplash.com/photo-1553425300-8bd56360f8eb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;w=1000&amp;q=80</image_link>
+					<image_description>350+ Polar Bear Pictures | Download Free Images on Unsplash</image_description>
+					<image_host>unsplash.com</image_host>
+					<image_source>https://unsplash.com/s/photos/polar-bear</image_source>
+					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWF9RI9fP349Hsjy9Ez1ReDMDSk9bqWAPFC7qb7XgVSB5AdG_v&amp;s</image_thumbnail_url>
+				</result>
+				<result>
+					<image_filename>PolarBeariStock.jpg?ve=1&amp;tl=1</image_filename>
+					<image_format>jpg</image_format>
+					<image_height>524</image_height>
+					<image_width>931</image_width>
+					<image_link>https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2018/09/931/524/PolarBeariStock.jpg?ve=1&amp;tl=1</image_link>
+					<image_description>San Diego Zoo polar bear eats live duck in enclosure, shocks ...</image_description>
+					<image_host>foxnews.com</image_host>
+					<image_source>https://www.foxnews.com/science/san-diego-zoo-polar-bear-eats-duck-video</image_source>
+					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXX8ZaW2p-vgXxnQiR_Vq3-Bn1t06dnAnvWNhqTN2ZFnI1uoKz&amp;s</image_thumbnail_url>
+				</result>
+			</search>
+		</session>
+	</gid>

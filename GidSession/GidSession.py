@@ -29,5 +29,8 @@ class GidSession:
 		newSearch = GidSearch(input_settings)
 		#newSearch.identity = str(uuid.uuid4())
 		self.searches.append(newSearch)
+
+	def addSearch(self, inputSearch):
+		self.searches.append(inputSearch)
 		
 

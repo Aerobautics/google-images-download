@@ -22,8 +22,8 @@ from google_images_download import google_images_download
 class GidResult:
 	'This class encapsulates all of the information owned by an individual search result.'
 	def __init__(self, items = None):
-		self.picture = [] #GidPicture()
-		self.thumbnail = [] #GidPicture()
+		self.picture = None #GidPicture()
+		self.thumbnail = None #GidPicture()
 
 		if items is None:
 			self.image_filename = None
@@ -40,6 +40,7 @@ class GidResult:
 			self.image_filename = items['image_filename']
 
 			self.image_format = items['image_format']
+			self.image_height = items['image_height']
 			self.image_width = items['image_width']
 			self.image_link = items['image_link']
 			self.image_description = items['image_description']
