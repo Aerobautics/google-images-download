@@ -23,9 +23,9 @@ class GidPicture:
 	'This class encapsulates all of the information owned by an individual image.'
 	def __init__(self):
 		self.thumbnail = False
-		self.location = []
-		self.provenance = []
-		self.provenance_size = []
-		self.provenance_type = []
-		self.alternate = []
-		self.note = []
+		self.location = None
+		self.provenance = None
+		self.provenance_size = None
+		self.provenance_type = None
+		self.alternate = None
+		self.note = None

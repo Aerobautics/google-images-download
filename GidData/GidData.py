@@ -11,6 +11,10 @@ import errno
 import xml.dom.minidom
 sys.path.insert(1, '../')
 from google_images_download import google_images_download
+from GidResult import GidResult
+from GidSearch import GidSearch
+from GidSession import GidSession
+from GidSettings import GidSettings
 
 # GID stands for 'Google Image Downloader'
 
@@ -29,30 +33,6 @@ class GidData:
 
 	def set_currentSession(self, value):
 		self._currentSession = value
-
-	def createXmlString(self, input_items, input_directory):
-		xmlString = '<?xml version="1.0" encoding="UTF-8"?>\n'		
-		xmlString = xmlString + '<session>\n'
-		xmlString = xmlString + '\t<search identity=\"'
-		xmlString = xmlString + self.currentSearch.identity + '\">\n'
-		xmlString = xmlString + '\t\t<setting>\n'
-		xmlString = xmlString + '\t\t\t<keyword>' + self.currentSearch.settings.keywords
-		xmlString = xmlString + '</keyword>\n'
-		xmlString = xmlString + '\t\t</setting>\n'
-		for item in input_items:
-			xmlString = xmlString + '\t\t<result>\n'
-			xmlString = xmlString + '\t\t\t<picture thumbnail="true">\n'
-			xmlString = xmlString + '\t\t\t\t<location>'
-			xmlString = xmlString + os.path.join(input_directory, item['image_filename']).replace('&', '&amp;')
-			xmlString = xmlString + '</location>\n'
-			xmlString = xmlString + '\t\t\t\t<provenance>'
-			xmlString = xmlString + item['image_link'].replace('&', '&amp;')
-			xmlString = xmlString + '</provenance>\n'			
-			xmlString = xmlString + '\t\t\t</picture>\n'
-			xmlString = xmlString + '\t\t</result>\n'
-		xmlString = xmlString + '\t</search>\n'
-		xmlString = xmlString + '</session>\n'
-		return xmlString
 
 	def populateSearch(self, search):
 		setting = GidSettings()
@@ -239,7 +219,8 @@ class GidData:
 
 	def readSession(self):
 		# Open XML document using the minidom parser
-		filenames = []
+		#filenames = []
+		session = None
 		session_location = os.path.join(os.path.realpath('.'), 'temp')
 		session_location = os.path.join(session_location, 'session.gid')
 		session_location = os.path.abspath(session_location)
@@ -248,14 +229,11 @@ class GidData:
 			DOMTree = xml.dom.minidom.parse(session_location)
 			self._currentSession = DOMTree
 			collection = DOMTree.documentElement
-			pictures = collection.getElementsByTagName("picture")
-			for picture in pictures:
-				filename = picture.getElementsByTagName("location")[0]
-				filenames.append(filename.childNodes[0].data)
-				#print("readXmlString {}".format(filenames))
+			temporary_child = collection.getElementsByTagName("session")[0]
+			session = self.transcribeSession(temporary_child)
 		else:
 			print("../temp/session.gid does not exist.")
-		return DOMTree
+		return session
 
 	def readSearchList(self):
 		if self._currentSession is not None:
@@ -264,8 +242,7 @@ class GidData:
 			searches = collection.getElementsByTagName("search")
 			for search in searches:
 				self.searchList.append(self.populateSearch(search))
-		#return self.searchList
-			
+		#return self.searchList	
 		
 	# Remove output_items and thumbnail_folder_path parameters
 	#def storeSearch(self, search, output_items, thumbnail_folder_path):
@@ -294,6 +271,40 @@ class GidData:
 		temporary_child = self.translateSession(inputSession)
 		DOMTree.documentElement.appendChild(temporary_child)
 		self.writeSession(DOMTree)
+
+	def transcribePicture(self, inputChild):
+		output = None
+		location = None
+		provenance = None
+		thumbnail = None
+		alternate = None
+		if inputChild.hasAttribute("thumbnail"):
+			thumbnail = child.getAttribute("thumbnail")
+		if inputChild.hasAttribute("alternate"):
+			alternate = child.getAttribute("alternate")
+		sub_child = inputChild.getElementsByTagName("location")[0]
+		location = sub_child.childNodes[0].data
+		sub_child = inputChild.getElementsByTagName("provenance")[0]
+		provenance = sub_child.childNodes[0].data
+		output = GidPicture()
+		if thumbnail is not None:
+			thumbnail = thumbnail.capitalize()
+			if thumbnail == "FALSE":
+				thumbnail = False
+			elif thumbnail == "NO":
+				thumbnail = False
+			elif thumbnail == "TRUE":
+				thumbnail = True
+			elif thumbnail == "YES":
+				thumbnail = True
+			else:
+				print("WARNING GidData.transcribePicture(DOMTree): invalid thumbnail setting")
+				thumbnail = None
+			output.thumbnail = thumbnail
+		output.location = location
+		output.provenance = provenance
+		ouput.alternate = alternate
+		return output
 
 	def translatePicture(self, inputPicture):
 		implementation = getDOMImplementation()
@@ -335,6 +346,102 @@ class GidData:
 			sub_child.appendChild(text_node)
 			temporary_child.appendChild(sub_child)
 		return temporary_child
+
+	def transcribeResult(self, DOMTree):
+		image_filename = None
+		image_format = None
+		image_height = None
+		image_width = None
+		image_link = None
+		image_description = None
+		image_host = None
+		image_source = None
+		image_thumbnail_url = None
+		pictures = [] # Eliminate?
+		output = GidResult.GidResult()
+		temporary_child = DOMTree.getElementsByTagName("picture")
+		for child in temporary_child:
+			picture = self.transcribePicture(child)
+			pictures.append(picture)
+			if picture.thumbnail == True:
+				output.thumbnail = picture
+			elif picture.thumbnail == False:
+				output.picture = picture
+			else:
+				print("WARNING GidData.transcribeResult(DOMTree): picture.thumbnail invalid")
+		temporary_child = DOMTree.getElementsByTagName("image_filename")
+		if temporary_child:
+			temporary_child = temporary_child[0]
+			sub_child = temporary_child.childNodes
+			if sub_child:
+				image_filename = sub_child[0].data
+				if image_filename:
+					output.image_filename = image_filename
+		temporary_child = DOMTree.getElementsByTagName("image_format")
+		if temporary_child:
+			temporary_child = temporary_child[0]
+			sub_child = temporary_child.childNodes
+			if sub_child:
+				image_format = sub_child[0].data
+				if image_format:
+					output.image_format = image_format
+		temporary_child = DOMTree.getElementsByTagName("image_height")
+		if temporary_child:
+			temporary_child = temporary_child[0]
+			sub_child = temporary_child.childNodes
+			if sub_child:
+				image_height = sub_child[0].data
+				if image_height:
+					output.image_height = image_height
+		temporary_child = DOMTree.getElementsByTagName("image_width")
+		if temporary_child:
+			temporary_child = temporary_child[0]
+			sub_child = temporary_child.childNodes
+			if sub_child:
+				image_width = sub_child[0].data
+				if image_width:
+					output.image_width = image_width
+		temporary_child = DOMTree.getElementsByTagName("image_link")
+		if temporary_child:
+			temporary_child = temporary_child[0]
+			sub_child = temporary_child.childNodes
+			if sub_child:
+				image_link = sub_child[0].data
+				if image_link:
+					output.image_link = image_link
+		temporary_child = DOMTree.getElementsByTagName("image_description")
+		if temporary_child:
+			temporary_child = temporary_child[0]
+			sub_child = temporary_child.childNodes
+			if sub_child:
+				image_description = sub_child[0].data
+				if image_description:
+					output.image_description = image_description
+		temporary_child = DOMTree.getElementsByTagName("image_host")
+		if temporary_child:
+			temporary_child = temporary_child[0]
+			sub_child = temporary_child.childNodes
+			if sub_child:
+				image_host = sub_child[0].data
+				if image_host:
+					output.image_host = image_host
+		temporary_child = DOMTree.getElementsByTagName("image_source")
+		if temporary_child:
+			temporary_child = temporary_child[0]
+			sub_child = temporary_child.childNodes
+			if sub_child:
+				image_source = sub_child[0].data
+				if image_source:
+					output.image_source = image_source
+		temporary_child = DOMTree.getElementsByTagName("image_thumbnail_url")
+		if temporary_child:
+			temporary_child = temporary_child[0]
+			sub_child = temporary_child.childNodes
+			if sub_child:
+				image_thumbnail_url = sub_child[0].data
+				if image_thumbnail_url:
+					output.image_thumbnail_url = image_thumbnail_url
+		return output
 
 	def translateResult(self, inputResult):
 		implementation = getDOMImplementation()
@@ -394,6 +501,31 @@ class GidData:
 			temporary_child.appendChild(sub_child)
 		return temporary_child
 
+	def transcribeSearch(self, DOMTree):
+		results = []
+		identity = None
+		output = None
+		if DOMTree.hasAttribute("identity"):
+			identity = DOMTree.getAttribute("identity")
+		else:
+			print("WARNING GidData.transcribe(DOMTree): search has no identity")
+		temporary_child = DOMTree.getElementsByTagName("setting")
+		if temporary_child:
+			temporary_child = temporary_child[0]
+			setting = self.transcribeSetting(temporary_child)
+			output = GidSearch.GidSearch(input_settings = setting)
+		else:
+			output = GidSearch.GidSearch()
+		if identity is not None:
+			output.identity = identity
+		temporary_child = DOMTree.getElementsByTagName("result")
+		for child in temporary_child:
+			result = self.transcribeResult(child)
+			results.append(result)
+		output.results = results
+		return output
+
+
 	def translateSearch(self, inputSearch):
 		implementation = getDOMImplementation()
 		document = implementation.createDocument(None, "gid", None)
@@ -407,6 +539,17 @@ class GidData:
 			temporary_child.appendChild(sub_child)
 		return temporary_child
 
+	def transcribeSession(self, DOMTree):
+		searches = []
+		output = GidSession.GidSession()
+		temporary_child = DOMTree.getElementsByTagName("search")
+		for child in temporary_child:
+			search = self.transcribeSearch(child)
+			searches.append(search)
+		output.searches = searches
+		return output
+
+
 	def translateSession(self, inputSession):
 		implementation = getDOMImplementation()
 		document = implementation.createDocument(None, "gid", None)
@@ -416,6 +559,92 @@ class GidData:
 			sub_child = self.translateSearch(search)
 			temporary_child.appendChild(sub_child)
 		return temporary_child		
+
+	def transcribeSetting(self, DOMTree):
+		config_file = None
+		keywords = None
+		keywords_from_file = None
+		prefix_keywords = None
+		suffix_keywords = None
+		limit = None
+		related_images = None
+		INPUT_format = None
+		color = None
+		color_type = None
+		usage_rights = None
+		size = None
+		exact_size = None
+		aspect_ratio = None
+		INPUT_type = None
+		time = None
+		time_range = None
+		delay = None
+		url = None
+		single_image = None
+		output_directory = None
+		image_directory = None
+		no_directory = None
+		proxy = None
+		similar_images = None
+		specific_site = None
+		print_urls = None
+		print_size = None
+		print_paths = None
+		metadata = None
+		extract_metadata = None
+		socket_timeout = None
+		thumbnail = None
+		thumbnail_only = None
+		language = None
+		prefix = None
+		chromedriver = None
+		safe_search = None
+		no_numbering = None
+		offset = None
+		save_source = None
+		no_download = None
+		silent_mode = None
+		ignore_urls = None
+		help = None
+		output = GidSettings()
+		temporary_child = DOMTree.getElementsByTagName("config_file")[0]
+		config_file = temporary_child.childNodes[0].data
+		if config_file:
+			output.config_file = config_file
+		temporary_child = DOMTree.getElementsByTagName("keywords")[0]
+		keywords = temporary_child.childNodes[0].data
+		if keywords:
+			output.keywords = keywords
+		temporary_child = DOMTree.getElementsByTagName("keywords_from_file")[0]
+		keywords_from_file = temporary_child.childNodes[0].data
+		if keywords_from_file:
+			output.keywords_from_file = keywords_from_file
+		temporary_child = DOMTree.getElementsByTagName("prefix_keywords")[0]
+		prefix_keywords = temporary_child.childNodes[0].data
+		if prefix_keywords:
+			output.prefix_keywords = prefix_keywords
+		temporary_child = DOMTree.getElementsByTagName("suffix_keywords")[0]
+		suffix_keywords = temporary_child.childNodes[0].data
+		if suffix_keywords:
+			output.suffix_keywords = suffix_keywords
+		temporary_child = DOMTree.getElementsByTagName("limit")[0]
+		limit = temporary_child.childNodes[0].data
+		if limit:
+			output.limit = limit
+		temporary_child = DOMTree.getElementsByTagName("related_images")[0]
+		related_images = temporary_child.childNodes[0].data
+		if related_images:
+			output.related_images = related_images
+		temporary_child = DOMTree.getElementsByTagName("format")[0]
+		INPUT_format = temporary_child.childNodes[0].data
+		if INPUT_format:
+			output.format = INPUT_format
+		temporary_child = DOMTree.getElementsByTagName("color")[0]
+		color = temporary_child.childNodes[0].data
+		if color:
+			output.color = color
+		#TODO Incomplete
+		return output
 
 	def translateSetting(self, inputSetting):
 		implementation = getDOMImplementation()
@@ -480,5 +709,28 @@ class GidData:
 		session_location = os.path.abspath(session_location)
 		output_file = open(session_location, "w")
 		DOMTree.writexml(output_file, indent = "\t", addindent = "\t", newl = '\n')
+
+	#def createXmlString(self, input_items, input_directory):
+	#	xmlString = '<?xml version="1.0" encoding="UTF-8"?>\n'		
+	#	xmlString = xmlString + '<session>\n'
+	#	xmlString = xmlString + '\t<search identity=\"'
+	#	xmlString = xmlString + self.currentSearch.identity + '\">\n'
+	#	xmlString = xmlString + '\t\t<setting>\n'
+	#	xmlString = xmlString + '\t\t\t<keyword>' + self.currentSearch.settings.keywords
+	#	xmlString = xmlString + '</keyword>\n'
+	#	xmlString = xmlString + '\t\t</setting>\n'
+	#	for item in input_items:
+	#		xmlString = xmlString + '\t\t<result>\n'
+	#		xmlString = xmlString + '\t\t\t<picture thumbnail="true">\n'
+	#		xmlString = xmlString + '\t\t\t\t<location>'
+	#		xmlString = xmlString + os.path.join(input_directory, item['image_filename']).replace('&', '&amp;')
+	#		xmlString = xmlString + '</location>\n'
+	#		xmlString = xmlString + '\t\t\t\t<provenance>'
+	#		xmlString = xmlString + '</provenance>\n'			
+	#		xmlString = xmlString + '\t\t\t</picture>\n'
+	#		xmlString = xmlString + '\t\t</result>\n'
+	#	xmlString = xmlString + '\t</search>\n'
+	#	xmlString = xmlString + '</session>\n'
+	#	return xmlString
 		
 

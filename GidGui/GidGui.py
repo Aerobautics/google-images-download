@@ -32,16 +32,29 @@ class GidGui:
 		self.columns = 3
 		self.pages = 100
 		self.current_page = 0
+		self.sessionIndex = 0
 
 		self.currentSettings = []
 
 		self.gidSession = []
-		self.keyword_entry = []
-		self.limit_entry = []
 		self.sessionList = []
-		self.main_form = []
-		self.main_frame = []
-		self.preview_frame = []
+
+		self.keyword_entry = None
+		self.limit_entry = None
+
+		self.mainForm = None
+		self.listFrame = None
+		self.mainFrame = None
+		self.previewFrame = None
+		self.sessionListbox = None
+		self.searchListbox = None
+
+		self.isListShown = False
+		self.isPreviewShown = False
+		self.isInitialized = False
+
+		self.preview_height = 300
+		self.preview_width = 300
 
 		self.currentSession = []
 		self.currentSearch = []
@@ -54,8 +67,13 @@ class GidGui:
 		self.currentSearch.settings.limit = 10
 		#self.gidData.set_currentSession(self.currentSession)
 
-	#def initialization(self):
+	def initialize(self):
+		if not self.isInitialized:
+			self.loadSession()
+			self.isInitialized = True
 
+	def defaultFunction(self, event):
+		print("Google Images Download")
 
 	def getKeyword(self):
 		return self.keyword_entry.get()
@@ -66,13 +84,13 @@ class GidGui:
 			limit = int(limit)
 		return limit
 
-	def defaultFunction(self):
-		print("Google Images Download")
+	def loadSession(self):
+		self.currentSession = self.gidData.readSession()
 
-	def nextPage(self):
+	def nextPage(self, event):
 		print("Go to next page")
 
-	def previousPage(self):
+	def previousPage(self, event):
 		print("Go to previous page")
 
 	def populateCurrentSearch(self, keyword = None, limit = None, thumbnail = None):
@@ -87,7 +105,18 @@ class GidGui:
 		for search in inputSearches:
 			self.currentSession.addSearch(search)
 
-	def previewDownload(self):
+	def populateSearchList(self):
+		self.searchListbox.delete(0, END)
+		for result in self.currentSession.searches[self.sessionIndex].results:
+			self.searchListbox.insert(END, result.image_filename)			
+
+	def populateSessionList(self):
+		self.sessionListbox.delete(0, END)
+		for search in self.currentSession.searches:
+			self.sessionListbox.insert(END, search.settings.keywords)
+
+	def preview(self, event):
+		self.showPreview()
 		start_time = time.time()
 		if self.getKeyword() == "":
 			return False
@@ -145,7 +174,11 @@ class GidGui:
 		for thumbnailFile in thumbnail_files:
 			loadImage = Image.open(thumbnailFile)
 			renderImage = ImageTk.PhotoImage(loadImage)
-			imageLabels.append(Label(self.preview_frame, image = renderImage))
+			imageLabels.append(Label(self.previewFrame,
+				image = renderImage,
+				relief = RIDGE,
+				height = self.preview_height,
+				width = self.preview_width))
 			imageLabels[gridCount].image = renderImage
 			if gridCount < (self.rows * self.columns):
 				imageLabels[gridCount].grid(row = gridCount // self.columns, column = gridCount % self.columns, padx = 5, pady = 5)
@@ -165,10 +198,26 @@ class GidGui:
 			return False
 		return True
 
+	def showList(self):
+		if not self.isListShown:
+			self.isListhShown = True
+			self.isPreviewShown = False
+			self.previewFrame.pack_forget()
+			self.listFrame.pack(fill = X)
+
+	def showPreview(self):
+		if not self.isPreviewShown:
+			self.isPreviewShown = True
+			self.isListShown = False
+			self.listFrame.pack_forget()
+			self.previewFrame.pack(fill = X)
+
 	def display(self):
+		self.initialize()
+
 		root = Tk()
 		root.title("Google Images Download")
-		root.geometry("720x480")
+		root.geometry("1080x720")
 
 		# Create menu
 		main_menu = Menu(root)
@@ -180,45 +229,80 @@ class GidGui:
 		file_menu.add_command(label = "Exit", command = root.destroy)
 		search_menu = Menu(main_menu)
 		main_menu.add_cascade(label = "Search", menu = search_menu)
-		search_menu.add_command(label = "Preview", command = self.previewDownload)
+		search_menu.add_command(label = "Preview", command = self.preview)
 		search_menu.add_command(label = "Start", command = self.defaultFunction)
 		search_menu.add_command(label = "Stop", command = self.defaultFunction)
+		# Top frame
+		top_frame = Frame(root)
+		top_frame.pack(side = TOP, fill = BOTH, anchor = N)
+		# Bottom frame
+		# Status frame
+		status_frame = Frame(root)
+		status_frame.pack(side = BOTTOM, fill = X, anchor = SW)
+		# Control frame
+		control_frame = Frame(top_frame)
+		control_frame.pack(side = LEFT, fill = Y, anchor = N)
 		# Main frame
-		main_frame = Frame(root)
-		main_frame.pack_propagate(False)
-		main_frame.pack(fill = BOTH, expand = True)
+		main_frame = Frame(top_frame)
+		main_frame.pack(side = LEFT, anchor = N)
+		# Accessory frame
+		accessory_frame = Frame(main_frame)
+		accessory_frame.pack(side = TOP, fill = X, anchor = N)
+		# Display frame
+		display_frame = Frame(main_frame)
+		display_frame.pack(side = TOP, anchor = N)
+		# List frame
+		list_frame = Frame(display_frame)
+		list_frame.pack(side = LEFT, fill = Y)
 		# Preview frame
-		preview_frame = Frame(root)
-		preview_frame.pack(fill = BOTH, expand = True)
+		preview_frame = Frame(display_frame)
+		preview_frame.pack(side = LEFT)
 		# Status bar
-		status_bar = Label(root, text = "Ready", bd = 1, relief = SUNKEN, anchor = W)
-		status_bar.pack(side = BOTTOM, fill = X)
+		status_bar = Label(status_frame, text = "Ready", bd = 1, relief = SUNKEN, anchor = W)
+		status_bar.pack(fill = X, expand = True)
 		# Search area
-		keyword_label = Label(main_frame, text = "Keyword: ")
-		keyword_entry = Entry(main_frame)
-		limit_label = Label(main_frame, text = "Limit: ")
-		limit_entry = Entry(main_frame, justify = RIGHT)
+		keyword_label = Label(accessory_frame, text = "Keyword: ")
+		keyword_entry = Entry(accessory_frame)
+		limit_label = Label(accessory_frame, text = "Limit: ")
+		limit_entry = Entry(accessory_frame, justify = RIGHT)
 		limit_entry.insert(0, "5")
-		preview_button = Button(main_frame, text = "Preview", command = self.previewDownload)
-		start_button = Button(main_frame, text = "Start", command = self.defaultFunction)
-		cancel_button = Button(main_frame, text = "Cancel", command = self.defaultFunction)
-		previous_button = Button(main_frame, text = "Previous", command = self.previousPage)
-		next_button = Button(main_frame, text = "Next", command = self.nextPage)
+		session_listbox = Listbox(list_frame)
+		search_listbox = Listbox(list_frame)
+		session_listbox.config(height = 35, width = 25)
+		search_listbox.config(height = 35, width = 45)
+		session_listbox.pack(side = LEFT, fill = Y)
+		search_listbox.pack(side = LEFT, fill = Y)
+		preview_button = Button(control_frame, text = "Preview", command = self.preview)
+		start_button = Button(control_frame, text = "Start", command = self.defaultFunction)
+		cancel_button = Button(control_frame, text = "Cancel", command = self.defaultFunction)
+		previous_button = Button(control_frame, text = "Previous", command = self.previousPage)
+		next_button = Button(control_frame, text = "Next", command = self.nextPage)
+		picture_button = Button(control_frame, text = "Picture", command = self.defaultFunction)
+		thumbnail_button = Button(control_frame, text = "Thumbnail", command = self.defaultFunction)
+		combo_button = Button(control_frame, text = "Combo", command = self.defaultFunction)
+		keyword_label.pack(side = LEFT)
+		keyword_entry.pack(side = LEFT)
+		limit_label.pack(side = LEFT)
+		limit_entry.pack(side = LEFT)
+		preview_button.pack(anchor = NW, fill = X)
+		start_button.pack(anchor = NW, fill = X)
+		cancel_button.pack(anchor = NW, fill = X)
+		previous_button.pack(anchor = NW, fill = X)
+		next_button.pack(anchor = NW, fill = X)
 
-		keyword_label.grid(row = 0, sticky = E)
-		keyword_entry.grid(row = 0, column = 1, columnspan = 2)
-		preview_button.grid(row = 1, column = 0)
-		start_button.grid(row = 1, column = 1)
-		cancel_button.grid(row = 1, column = 2)
-		limit_label.grid(row = 0, column = 3)
-		limit_entry.grid(row = 0, column = 4)
-		previous_button.grid(row = 2, column = 0)
-		next_button.grid(row = 2, column = 1)
-
+		self.sessionListbox = session_listbox
+		self.searchListbox = search_listbox
 		self.keyword_entry = keyword_entry
 		self.limit_entry = limit_entry
-		self.main_form = root
-		self.main_frame = main_frame
-		self.preview_frame = preview_frame
+
+		self.mainForm = root
+
+		self.listFrame = list_frame
+		self.mainFrame = main_frame
+		self.previewFrame = preview_frame
+
+		self.populateSessionList()
+		self.populateSearchList()
+		self.isListShown = True
 
 		root.mainloop()

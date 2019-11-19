@@ -1,65 +1,65 @@
 <?xml version="1.0" ?>
 	<gid>
 		<session>
-			<search identity="4c3755d9-437e-4185-94cc-02f98c8d1146">
+			<search identity="b2205a4f-8fe6-4332-b411-b2922de09304">
 				<result>
-					<keywords>polar bear</keywords>
+					<keywords>apple</keywords>
 					<limit>5</limit>
 				</result>
 				<result>
-					<image_filename>Polar_Bear_-_Alaska_%28cropped%29.jpg</image_filename>
-					<image_format>jpg</image_format>
-					<image_height>565</image_height>
-					<image_width>563</image_width>
-					<image_link>https://upload.wikimedia.org/wikipedia/commons/6/66/Polar_Bear_-_Alaska_%28cropped%29.jpg</image_link>
-					<image_description>Polar bear - Wikipedia</image_description>
-					<image_host>en.wikipedia.org</image_host>
-					<image_source>https://en.wikipedia.org/wiki/Polar_bear</image_source>
-					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxVs0LN4Hvlm0sKTNaDrVdspfaJelij5X_q2mCf8Qtwbg7E2Mv&amp;s</image_thumbnail_url>
-				</result>
-				<result>
-					<image_filename>polar-bear-hero.jpg?1345901694</image_filename>
-					<image_format>jpg</image_format>
-					<image_height>480</image_height>
-					<image_width>640</image_width>
-					<image_link>https://c402277.ssl.cf1.rackcdn.com/photos/2330/images/hero_small/polar-bear-hero.jpg?1345901694</image_link>
-					<image_description>Polar Bear | Species | WWF</image_description>
-					<image_host>worldwildlife.org</image_host>
-					<image_source>https://www.worldwildlife.org/species/polar-bear</image_source>
-					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgWohk4K9qpVs5iYDSRyWrwIzeMG7pYavUJFl36qg-Jl91RGqhSQ&amp;s</image_thumbnail_url>
-				</result>
-				<result>
-					<image_filename>tnc_17745326_preview-1260x708.jpg</image_filename>
-					<image_format>jpg</image_format>
-					<image_height>708</image_height>
-					<image_width>1260</image_width>
-					<image_link>https://19mvmv3yn2qc2bdb912o1t2n-wpengine.netdna-ssl.com/science/files/2013/12/tnc_17745326_preview-1260x708.jpg</image_link>
-					<image_description>Will Polar Bears Die Out Because of Climate Change?</image_description>
-					<image_host>blog.nature.org</image_host>
-					<image_source>https://blog.nature.org/science/2013/12/03/what-science-polar-bear/</image_source>
-					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbGo4JgIodOegsRVjKFSkJpUR3ejofFUw8OWzid6oU2Gz_o-Yp&amp;s</image_thumbnail_url>
-				</result>
-				<result>
-					<image_filename>photo-1553425300-8bd56360f8eb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;w=1000&amp;q=80</image_filename>
+					<image_filename>og-default?wid=1200&amp;hei=630&amp;fmt=jpeg&amp;qlt=95&amp;op_usm=0.5,0.5&amp;.v=1525370171638</image_filename>
 					<image_format></image_format>
-					<image_height>596</image_height>
-					<image_width>1000</image_width>
-					<image_link>https://images.unsplash.com/photo-1553425300-8bd56360f8eb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;w=1000&amp;q=80</image_link>
-					<image_description>350+ Polar Bear Pictures | Download Free Images on Unsplash</image_description>
-					<image_host>unsplash.com</image_host>
-					<image_source>https://unsplash.com/s/photos/polar-bear</image_source>
-					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWF9RI9fP349Hsjy9Ez1ReDMDSk9bqWAPFC7qb7XgVSB5AdG_v&amp;s</image_thumbnail_url>
+					<image_height>630</image_height>
+					<image_width>1200</image_width>
+					<image_link>https://as-images.apple.com/is/og-default?wid=1200&amp;hei=630&amp;fmt=jpeg&amp;qlt=95&amp;op_usm=0.5,0.5&amp;.v=1525370171638</image_link>
+					<image_description>Apple Accessories for Apple Watch, iPhone, iPad, iPod, and Mac</image_description>
+					<image_host>apple.com</image_host>
+					<image_source>https://www.apple.com/shop/accessories/all-accessories</image_source>
+					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrbylTXqZAq_03XbuDe-k1A142KMDP02qKfYAaolXppirqx_04&amp;s</image_thumbnail_url>
 				</result>
 				<result>
-					<image_filename>PolarBeariStock.jpg?ve=1&amp;tl=1</image_filename>
-					<image_format>jpg</image_format>
-					<image_height>524</image_height>
-					<image_width>931</image_width>
-					<image_link>https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2018/09/931/524/PolarBeariStock.jpg?ve=1&amp;tl=1</image_link>
-					<image_description>San Diego Zoo polar bear eats live duck in enclosure, shocks ...</image_description>
-					<image_host>foxnews.com</image_host>
-					<image_source>https://www.foxnews.com/science/san-diego-zoo-polar-bear-eats-duck-video</image_source>
-					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXX8ZaW2p-vgXxnQiR_Vq3-Bn1t06dnAnvWNhqTN2ZFnI1uoKz&amp;s</image_thumbnail_url>
+					<image_filename>knowledge_graph_logo.png?201606271147</image_filename>
+					<image_format>png</image_format>
+					<image_height>302</image_height>
+					<image_width>302</image_width>
+					<image_link>https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?201606271147</image_link>
+					<image_description>AirPods with Charging Case</image_description>
+					<image_host>apple.com</image_host>
+					<image_source>https://www.apple.com/shop/product/MV7N2AM/A/airpods-with-charging-case</image_source>
+					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYfgh6R22EUz-8EUwh-e68sSEFOHWXeZHuysRW_DPkhahMgdwJ&amp;s</image_thumbnail_url>
+				</result>
+				<result>
+					<image_filename>open_graph_logo.png?201809210816</image_filename>
+					<image_format>png</image_format>
+					<image_height>630</image_height>
+					<image_width>1200</image_width>
+					<image_link>https://www.apple.com/ac/structured-data/images/open_graph_logo.png?201809210816</image_link>
+					<image_description>Apple</image_description>
+					<image_host>apple.com</image_host>
+					<image_source>https://www.apple.com/</image_source>
+					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrdINKE0Mf9NtmvZqt8GWSwDXjvtFGrRyy1SsO9l-zFyFLoMWg&amp;s</image_thumbnail_url>
+				</result>
+				<result>
+					<image_filename>apple8.0.png</image_filename>
+					<image_format>png</image_format>
+					<image_height>800</image_height>
+					<image_width>1200</image_width>
+					<image_link>https://cdn.vox-cdn.com/thumbor/DqZ_YBYBAVZtBF1PFi2fj4DOszM=/0x0:1280x800/1200x800/filters:focal(538x298:742x502)/cdn.vox-cdn.com/uploads/chorus_image/image/61897327/apple8.0.png</image_link>
+					<image_description>New Apple iPad rumors: bezels, notch, USB-C - The Verge</image_description>
+					<image_host>theverge.com</image_host>
+					<image_source>https://www.theverge.com/circuitbreaker/2018/10/25/18018682/ipad-rumors-new-apple-bezel-free-pro-usb-c-face-id-notch</image_source>
+					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReumo6manAe_KojZz2z7vgdzYovayGXS9OxtOfgKD8JWPOj6kW3g&amp;s</image_thumbnail_url>
+				</result>
+				<result>
+					<image_filename>1200px-Apple_logo_black.svg.png</image_filename>
+					<image_format>png</image_format>
+					<image_height>1424</image_height>
+					<image_width>1200</image_width>
+					<image_link>https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1200px-Apple_logo_black.svg.png</image_link>
+					<image_description>History of Apple Inc. - Wikipedia</image_description>
+					<image_host>en.wikipedia.org</image_host>
+					<image_source>https://en.wikipedia.org/wiki/History_of_Apple_Inc.</image_source>
+					<image_thumbnail_url>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCVFAgcE8MMjx58ZifOsfcFC-u0g0U_DitQK-sRg0U3NkOAdNP&amp;s</image_thumbnail_url>
 				</result>
 			</search>
 		</session>
