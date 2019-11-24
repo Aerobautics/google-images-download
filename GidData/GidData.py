@@ -643,7 +643,146 @@ class GidData:
 		color = temporary_child.childNodes[0].data
 		if color:
 			output.color = color
-		#TODO Incomplete
+		temporary_child = DOMTree.getElementsByTagName("color_type")[0]
+		color_type = temporary_child.childNodes[0].data
+		if color_type:
+			output.color_type = color_type
+		temporary_child = DOMTree.getElementsByTagName("usage_rights")[0]
+		usage_rights = temporary_child.childNodes[0].data
+		if usage_rights:
+			output.usage_rights = usage_rights
+		temporary_child = DOMTree.getElementsByTagName("size")[0]
+		_size = temporary_child.childNodes[0].data
+		if _size:
+			output.size = _size
+		temporary_child = DOMTree.getElementsByTagName("exact_size")[0]
+		exact_size = temporary_child.childNodes[0].data
+		if exact_size:
+			output.exact_size = exact_size
+		temporary_child = DOMTree.getElementsByTagName("aspect_ratio")[0]
+		aspect_ratio = temporary_child.childNodes[0].data
+		if aspect_ratio:
+			output.aspect_ratio = aspect_ratio
+		temporary_child = DOMTree.getElementsByTagName("type")[0]
+		_type = temporary_child.childNodes[0].data
+		if _type:
+			output.type = _type
+		temporary_child = DOMTree.getElementsByTagName("time_range")[0]
+		time_range = temporary_child.childNodes[0].data
+		if time_range:
+			output.time_range = time_range
+		temporary_child = DOMTree.getElementsByTagName("delay")[0]
+		delay = temporary_child.childNodes[0].data
+		if delay:
+			output.delay = delay
+		temporary_child = DOMTree.getElementsByTagName("url")[0]
+		url = temporary_child.childNodes[0].data
+		if url:
+			output.url = url
+		temporary_child = DOMTree.getElementsByTagName("single_image")[0]
+		single_image = temporary_child.childNodes[0].data
+		if single_image:
+			output.single_image = single_image
+		temporary_child = DOMTree.getElementsByTagName("output_directory")[0]
+		output_directory = temporary_child.childNodes[0].data
+		if output_directory:
+			output.output_directory = output_directory
+		temporary_child = DOMTree.getElementsByTagName("image_directory")[0]
+		image_directory = temporary_child.childNodes[0].data
+		if image_directory:
+			output.image_directory = image_directory
+		temporary_child = DOMTree.getElementsByTagName("no_directory")[0]
+		no_directory = temporary_child.childNodes[0].data
+		if no_directory:
+			output.no_directory = no_directory
+		temporary_child = DOMTree.getElementsByTagName("proxy")[0]
+		proxy = temporary_child.childNodes[0].data
+		if proxy:
+			output.proxy = proxy
+		temporary_child = DOMTree.getElementsByTagName("similar_images")[0]
+		similar_images = temporary_child.childNodes[0].data
+		if similar_images:
+			output.similar_images = similar_images
+		temporary_child = DOMTree.getElementsByTagName("specific_site")[0]
+		specific_site = temporary_child.childNodes[0].data
+		if specific_site:
+			output.specific_site = specific_site
+		temporary_child = DOMTree.getElementsByTagName("print_urls")[0]
+		print_urls = temporary_child.childNodes[0].data
+		if print_urls:
+			output.print_urls = print_urls
+		temporary_child = DOMTree.getElementsByTagName("print_size")[0]
+		print_size = temporary_child.childNodes[0].data
+		if print_size:
+			output.print_size = print_size
+		temporary_child = DOMTree.getElementsByTagName("print_paths")[0]
+		print_paths = temporary_child.childNodes[0].data
+		if print_paths:
+			output.print_paths = print_paths
+		temporary_child = DOMTree.getElementsByTagName("metadata")[0]
+		metadata = temporary_child.childNodes[0].data
+		if metadata:
+			output.metadata = metadata
+		temporary_child = DOMTree.getElementsByTagName("extract_metadata")[0]
+		extract_metadata = temporary_child.childNodes[0].data
+		if extract_metadata:
+			output.extract_metadata = extract_metadata
+		temporary_child = DOMTree.getElementsByTagName("socket_timeout")[0]
+		socket_timeout = temporary_child.childNodes[0].data
+		if socket_timeout:
+			output.socket_timeout = socket_timeout
+		temporary_child = DOMTree.getElementsByTagName("thumbnail")[0]
+		thumbnail = temporary_child.childNodes[0].data
+		if thumbnail:
+			output.thumbnail = thumbnail
+		temporary_child = DOMTree.getElementsByTagName("thumbnail_only")[0]
+		thumbnail_only = temporary_child.childNodes[0].data
+		if thumbnail_only:
+			output.thumbnail_only = thumbnail_only
+		temporary_child = DOMTree.getElementsByTagName("language")[0]
+		language = temporary_child.childNodes[0].data
+		if language:
+			output.language = language
+		temporary_child = DOMTree.getElementsByTagName("prefix")[0]
+		prefix = temporary_child.childNodes[0].data
+		if prefix:
+			output.prefix = prefix
+		temporary_child = DOMTree.getElementsByTagName("chromedriver")[0]
+		chromedriver = temporary_child.childNodes[0].data
+		if chromedriver:
+			output.chromedriver = chromedriver
+		temporary_child = DOMTree.getElementsByTagName("safe_search")[0]
+		safe_search = temporary_child.childNodes[0].data
+		if safe_search:
+			output.safe_search = safe_search
+		temporary_child = DOMTree.getElementsByTagName("no_numbering")[0]
+		no_numbering = temporary_child.childNodes[0].data
+		if no_numbering:
+			output.no_numbering = no_numbering
+		temporary_child = DOMTree.getElementsByTagName("offset")[0]
+		offset = temporary_child.childNodes[0].data
+		if offset:
+			output.offset = offset
+		temporary_child = DOMTree.getElementsByTagName("save_source")[0]
+		save_source = temporary_child.childNodes[0].data
+		if save_source:
+			output.save_source = save_source
+		temporary_child = DOMTree.getElementsByTagName("no_download")[0]
+		no_download = temporary_child.childNodes[0].data
+		if no_download:
+			output.no_download = no_download
+		temporary_child = DOMTree.getElementsByTagName("silent_mode")[0]
+		silent_mode = temporary_child.childNodes[0].data
+		if silent_mode:
+			output.silent_mode = silent_mode
+		temporary_child = DOMTree.getElementsByTagName("ignore_urls")[0]
+		ignore_urls = temporary_child.childNodes[0].data
+		if ignore_urls:
+			output.ignore_urls = ignore_urls
+		temporary_child = DOMTree.getElementsByTagName("help")[0]
+		help = temporary_child.childNodes[0].data
+		if help:
+			output.help = help
 		return output
 
 	def translateSetting(self, inputSetting):
