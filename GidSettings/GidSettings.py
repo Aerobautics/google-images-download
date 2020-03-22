@@ -25,14 +25,14 @@ class GidSettings:
 		self.suffix_keywords = None
 		self.limit = None
 		self.related_images = None
-		self.format = None // change to _format?
+		self.format = None # change to _format?
 		self.color = None
 		self.color_type = None
 		self.usage_rights = None
-		self.size = None // change to _size?
+		self.size = None # change to _size?
 		self.exact_size = None
 		self.aspect_ratio = None
-		self.type = None // change to _type?
+		self.type = None # change to _type?
 		self.time = None
 		self.time_range = None
 		self.delay = None
